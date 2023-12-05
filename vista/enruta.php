@@ -9,9 +9,6 @@
     }if ($_GET['menu'] == "registro") {
         require_once './formularios/registro.php';
      
-    }if ($_GET['menu'] == "olvido") {
-        require_once './formularios/recuperarContrasenia.php';
-     
     } if ($_GET['menu'] == "crearConvocatoria") {
         require_once './formularios/convocatoria.php';
      
