@@ -103,7 +103,10 @@ class convocatoriaRepo {
         $stmt->bindParam(':fechaInicioPrueba', $fechaInicioPrueba);
         $stmt->bindParam(':fechaFinPrueba', $fechaFinPrueba);
         $stmt->bindParam(':fechaInicioDefinitiva', $fechaInicioDefinitiva);
-        $stmt->bindParam(':fk_proyecto', $fk_proyecto, PDO::PARAM_INT);
+        $stmt->bindParam(':fk_proyecto', $fk_proyecto);
+
+/*         $stmt->bindParam(':fk_proyecto', $fk_proyecto, PDO::PARAM_INT);
+ */
 
 
         $stmt->execute();
@@ -118,6 +121,7 @@ class convocatoriaRepo {
       
         $stmtDestinatario->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
         $stmtDestinatario->bindParam(':id_destinatario', $id_destinatario);
+        
         $stmtDestinatario->execute();
 
 

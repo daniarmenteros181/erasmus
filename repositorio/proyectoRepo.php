@@ -66,6 +66,23 @@ class ProyectoRepo {
         $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $proyectos;
     } 
+
+    // Leer todos los proyectos y obtener código y nombre
+    public static function leerCodigosYNombresProyectos() {
+        $conexion = db::entrar();
+
+        $sql = "SELECT cod_proyecto, nombre FROM proyecto";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+
+        $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt->closeCursor();
+
+        return $proyectos;
+    }
+
+
 }
 
 ?>

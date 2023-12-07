@@ -61,6 +61,38 @@ class DestinatarioRepo {
         $destinatarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $destinatarios;
     }
+
+    /* // Leer todos los destinatarios y obtener ID y nombre
+    public static function leerIdsYNombresDestinatarios() {
+        $conexion = db::entrar();
+
+        $sql = "SELECT cod_grupo, nombre FROM destinatario";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+
+        $destinatarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt->closeCursor();
+
+        return $destinatarios;
+    } */
+
+    // Leer todos los destinatarios y obtener ID, código de grupo y nombre
+    public static function leerDatosDestinatarios() {
+        $conexion = db::entrar();
+
+        $sql = "SELECT cod_grupo, nombre FROM destinatario";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+
+        $destinatarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmt->closeCursor();
+
+        return $destinatarios;
+    }
+
+
 }
 
 ?>
