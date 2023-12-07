@@ -59,6 +59,34 @@ class CandidatosConvocatoriaRepo {
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+
+     /* public static function insertarCandidatoConvocatoria($idCandidatos, $idConvocatoria) {
+        
+        $conexion = db::entrar();
+    
+        $sql = "INSERT INTO candidatosconvocatoria (id_candidatos, id_convocatoria) VALUES (:id_candidatos, :id_convocatoria)";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':id_candidatos', $idCandidato, PDO::PARAM_INT);
+        $stmt->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $stmt->closeCursor();
+    }  */
+
+    public static function insertarCandidatoConvocatoria($idCandidatos, $idConvocatoria) {
+        $conexion = db::entrar();
+    
+        $sql = "INSERT INTO candidatosconvocatoria (id_candidatos, id_convocatoria) VALUES (:id_candidatos, :id_convocatoria)";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':id_candidatos', $idCandidatos, PDO::PARAM_INT); // Corregir aquí
+        $stmt->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $stmt->closeCursor();
+    }
+    
+    
+    
 }
 
 ?>

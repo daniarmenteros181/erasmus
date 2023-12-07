@@ -301,7 +301,7 @@ class convocatoriaRepo {
         $id = self::obtenerIdCandidatoDesdeBaseDeDatos($conexion);
 
         // Imprime o devuelve el ID del destinatario (puedes comentar o eliminar la línea de echo si no necesitas imprimirlo)
-        echo $id;
+        echo ("id de candidato:, $id");
 
         return $id;
     }
@@ -311,7 +311,7 @@ class convocatoriaRepo {
         // Ajusta esto según la estructura real de tu base de datos y lógica de la aplicación
     
         // Supongamos que la tabla candidato tiene un campo id_candidato y un campo nombre_usuario
-        $sql = "SELECT dni FROM candidatos WHERE nombre = :nombreUsuario"; // Ajusta la consulta según tu estructura
+        $sql = "SELECT id FROM candidatos WHERE nombre = :nombreUsuario"; // Ajusta la consulta según tu estructura
         $stmt = $conexion->prepare($sql);
     
         // Aquí vinculamos parámetros si es necesario
@@ -323,7 +323,7 @@ class convocatoriaRepo {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
     
         // Retornar el ID del candidato o null si no se encuentra
-        return $resultado['dni'] ?? null;
+        return $resultado['id'] ?? null;
     }
     
 
