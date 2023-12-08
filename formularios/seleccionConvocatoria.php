@@ -6,21 +6,36 @@ require_once '../repositorio/candidatosRepo.php';
 require_once '../repositorio/db.php'; 
 require_once '../helpers/sesion.php';  
 
+use Dompdf\Dompdf;
+
+
+
 sesion::iniciaSesion();
 
 class seleccionConvocatoria {
 
     public static function comenzar() {
 
+        
+
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
-            if (isset($_POST['crear'])) {
+            if (isset($_POST['crear'])) 
+            {
                 // Procesar creación de candidato
                 self::procesarCreacion();
-            } elseif (isset($_POST['Actualizar'])) {
+            }elseif (isset($_POST['DescargarPDF'])) 
+            {
+                // Descargar el PDF automáticamente
+                self::descargarPDF($candidato);
+            } elseif (isset($_POST['Actualizar'])) 
+            {
                 // Procesar actualización de candidato
                 self::procesarActualizacion();
-            } else {
+            } else 
+            {
                 echo "Error al procesar la solicitud.";
             }
         }
@@ -91,13 +106,19 @@ class seleccionConvocatoria {
                         <input type="text" id="rol" name="rol" value="<?php echo $candidato['rol']; ?>"><br>
 
                         <input type="submit" name="Actualizar" value="Actualizar">
+                        <input type="submit" name="DescargarPDF" value="Descargar PDF">
+
                     </form>
                 </body>
                 </html>
 
                 <?php
             }
+
+
+
              
+
 
                         echo "Crear una solicitud para la convocatoria $idConvo con dni de candidato $id";
 
@@ -147,6 +168,51 @@ class seleccionConvocatoria {
         } catch (Exception $e) {
             echo "Error al actualizar el candidato: " . $e->getMessage();
         }
+    }
+
+
+
+
+    private static function descargarPDF($candidato) {
+        // Código para generar el PDF con los datos del candidato y descargarlo
+        require_once '../vendor/autoload.php';
+ 
+        $html = '
+        <html>
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <title>Datos del Candidato</title>
+        </head>
+        <body>
+            <h2>Datos del Candidato</h2>
+            <p>ID: ' . $candidato['id'] . '</p>
+            <p>DNI: ' . $candidato['dni'] . '</p>
+            <!-- Resto de los campos -->
+        </body>
+        </html>';
+
+        $mipdf = new Dompdf();
+        $mipdf->set_paper("A4", "portrait");
+        $mipdf->load_html($html);
+        $mipdf->render();
+
+        // Obtén el contenido del PDF generado
+        $pdf = $mipdf->output();
+
+        // Configura el nombre del archivo
+        $filename = "Candidato_" . $candidato['id'] . ".pdf";
+
+        // Descargar el PDF al navegador
+        header('Content-Type: application/pdf');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Content-Length: ' . strlen($pdf));
+        header('Content-Transfer-Encoding: binary');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        ob_clean();
+        flush();
+        echo $pdf;
+        exit;
     }
 }
 
