@@ -8,7 +8,7 @@ class ConvocatoriaBaremoIdiomaRepo {
     public static function crearConvocatoriaBaremoIdioma($fkNivelesIdiomas, $fkConvocatoriaBaremo, $valor) {
         $conexion = db::entrar();
 
-        $sql = "INSERT INTO convocatoria_baremo_idioma (fk_niveles_idiomas, fk_convocatoria_baremo, valor) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO convocatoriabaremoidioma (fk_niveles_idiomas, fk_convocatoria_baremo, valor) VALUES (?, ?, ?)";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("iss", $fkNivelesIdiomas, $fkConvocatoriaBaremo, $valor);
         $stmt->execute();
@@ -19,7 +19,7 @@ class ConvocatoriaBaremoIdiomaRepo {
     public static function actualizarConvocatoriaBaremoIdioma($id, $fkNivelesIdiomas, $fkConvocatoriaBaremo, $valor) {
         $conexion = db::entrar();
 
-        $sql = "UPDATE convocatoria_baremo_idioma SET fk_niveles_idiomas=?, fk_convocatoria_baremo=?, valor=? WHERE id=?";
+        $sql = "UPDATE convocatoriabaremoidioma SET fk_niveles_idiomas=?, fk_convocatoria_baremo=?, valor=? WHERE id=?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("issi", $fkNivelesIdiomas, $fkConvocatoriaBaremo, $valor, $id);
         $stmt->execute();
@@ -30,7 +30,7 @@ class ConvocatoriaBaremoIdiomaRepo {
     public static function borrarConvocatoriaBaremoIdioma($id) {
         $conexion = db::entrar();
 
-        $sql = "DELETE FROM convocatoria_baremo_idioma WHERE id=?";
+        $sql = "DELETE FROM convocatoriabaremoidioma WHERE id=?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -41,7 +41,7 @@ class ConvocatoriaBaremoIdiomaRepo {
     public static function leerConvocatoriaBaremoIdiomaPorId($id) {
         $conexion = db::entrar();
 
-        $sql = "SELECT * FROM convocatoria_baremo_idioma WHERE id=?";
+        $sql = "SELECT * FROM convocatoriabaremoidioma WHERE id=?";
         $stmt = $this->conexion->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -55,7 +55,7 @@ class ConvocatoriaBaremoIdiomaRepo {
     public static function leerTodasLasConvocatoriasBaremoIdioma() {
         $conexion = db::entrar();
 
-        $result = $conexion->query("SELECT * FROM convocatoria_baremo_idioma");
+        $result = $conexion->query("SELECT * FROM convocatoriabaremoidioma");
         $convocatoriasBaremoIdioma = $result->fetch_all(MYSQLI_ASSOC);
         return $convocatoriasBaremoIdioma;
     }

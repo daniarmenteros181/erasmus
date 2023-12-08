@@ -16,8 +16,8 @@ class registro{
             $apellidos = $_POST["apellidos"];
             $contra = $_POST["contra"];
             $fechaNac = $_POST["fechaNac"];
-        /*     $curso = $_POST["curso"];
-         */    $telefono = $_POST["telefono"];
+            $fk_destinatario = $_POST["fk_destinatario"];
+            $telefono = $_POST["telefono"];
             $correo = $_POST["correo"];
             $domicilio = $_POST["domicilio"];
         
@@ -30,10 +30,10 @@ class registro{
             $domicilioTutor = $_POST["domicilioTutor"];
          
             // Llamada a la función para crear un nuevo candidato
-            CandidatosRepo::crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $telefono, $correo, $domicilio, $contra, 'alum');
+            CandidatosRepo::crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $telefono, $correo, $domicilio,$fk_destinatario, $contra, 'alum');
         
-             TutorRepo::crearTutor($dniTutor, $nombreTutor, $apellidosTutor, $tutorTelefono, $domicilioTutor);
-         
+/*              TutorRepo::crearTutor($dniTutor, $nombreTutor, $apellidosTutor, $tutorTelefono, $domicilioTutor);
+ */         
             
         }
         
@@ -83,9 +83,25 @@ class registro{
         <label for="fechaNac">Fecha de Nacimiento:</label>
             <input type="date" id="fechaNac" name="fechaNac" onchange="mostrarFormularioTutor();" required><br><br>
 
-        <!-- <label for="curso">Curso:</label>
-        <input type="text" id="curso" name="curso"><br><br>
- -->
+        
+        <label for="fk_destinatario">Curso:</label>
+         <select id="fk_destinatario" name="fk_destinatario">
+         <?php
+        // Obtén la lista de IDs y nombres de destinatarios
+        $destinatarios = DestinatarioRepo::leerDatosDestinatarios();
+
+        // Genera las opciones del formulario
+        foreach ($destinatarios as $destinatario) {
+            $idDestinatario = $destinatario['cod_grupo'];
+            $nombreDestinatario = $destinatario['nombre'];
+            echo "<option value=\"$idDestinatario\">$nombreDestinatario</option>";
+        }
+        ?>
+        </select>
+        <br><br>
+
+
+
         <label for="telefono">Telefono:</label>
         <input type="number" id="telefono" name="telefono"><br><br>
 

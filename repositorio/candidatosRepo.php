@@ -4,10 +4,10 @@
 class CandidatosRepo {
 
    // Crear un nuevo candidato  
-   public static function crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $tlf, $correo, $domicilio, $contrasenia, $rol) {
+   public static function crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $tlf, $correo, $domicilio,$fk_destinatario, $contrasenia, $rol) {
     $conexion = db::entrar();
 
-    $sql = "INSERT INTO candidatos (dni, fechaNac, apellidos, nombre, tlf, correo, domicilio, contrasenia, rol) VALUES (:dni, :fechaNac, :apellidos, :nombre, :tlf, :correo, :domicilio, :contrasenia, :rol)";
+    $sql = "INSERT INTO candidatos (dni, fechaNac, apellidos, nombre, tlf, correo, domicilio,fk_destinatario, contrasenia, rol) VALUES (:dni, :fechaNac, :apellidos, :nombre, :tlf, :correo, :domicilio,:fk_destinatario, :contrasenia, :rol)";
    
     $stmt = $conexion->prepare($sql);
     $stmt->bindParam(':dni', $dni);
@@ -17,8 +17,8 @@ class CandidatosRepo {
     $stmt->bindParam(':tlf', $tlf);
     $stmt->bindParam(':correo', $correo);
     $stmt->bindParam(':domicilio', $domicilio);
-/*     $stmt->bindParam(':fk_destinatario', $fk_destinatario);
- */    $stmt->bindParam(':contrasenia', $contrasenia);
+    $stmt->bindParam(':fk_destinatario', $fk_destinatario);
+    $stmt->bindParam(':contrasenia', $contrasenia);
     $stmt->bindParam(':rol', $rol);
     $stmt->execute();
 
@@ -49,10 +49,10 @@ class CandidatosRepo {
     }
 
     // Actualizar un candidato existente por ID
-    public static function actualizarCandidato($id, $dni, $fechaNac, $apellidos, $nombre, $tlf, $correo, $domicilio, $fk_tutor, $fk_destinatario, $contrasenia, $rol) {
+    public static function actualizarCandidato($id, $dni, $fechaNac, $apellidos, $nombre, $tlf, $correo, $domicilio, $fk_destinatario, $contrasenia, $rol) {
         $conexion = db::entrar();
 
-        $sql = "UPDATE candidatos SET dni=:dni, fechaNac=:fechaNac, apellidos=:apellidos, nombre=:nombre, tlf=:tlf, correo=:correo, domicilio=:domicilio, fk_tutor=:fk_tutor, fk_destinatario=:fk_destinatario, contrasenia=:contrasenia, rol=:rol WHERE id=:id";
+        $sql = "UPDATE candidatos SET dni=:dni, fechaNac=:fechaNac, apellidos=:apellidos, nombre=:nombre, tlf=:tlf, correo=:correo, domicilio=:domicilio, fk_destinatario=:fk_destinatario, contrasenia=:contrasenia, rol=:rol WHERE id=:id";
         
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':dni', $dni);
@@ -62,8 +62,7 @@ class CandidatosRepo {
         $stmt->bindParam(':tlf', $tlf);
         $stmt->bindParam(':correo', $correo);
         $stmt->bindParam(':domicilio', $domicilio);
-        $stmt->bindParam(':fk_tutor', $fk_tutor, PDO::PARAM_INT);
-        $stmt->bindParam(':fk_destinatario', $fk_destinatario, PDO::PARAM_INT);
+       $stmt->bindParam(':fk_destinatario', $fk_destinatario, PDO::PARAM_INT);
         $stmt->bindParam(':contrasenia', $contrasenia);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':rol', $rol);
@@ -91,8 +90,8 @@ class CandidatosRepo {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->close();
-
+/*         $stmt->close();
+ */
         return $result;
     }
     // Leer todos los candidatos

@@ -82,8 +82,8 @@ class CandidatosConvocatoriaRepo {
         $stmt->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
         $stmt->execute();
     
-        $stmt->closeCursor();
-    }
+/*         $stmt->closeCursor();
+ */    }
     
     
     

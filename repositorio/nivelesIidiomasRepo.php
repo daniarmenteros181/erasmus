@@ -6,7 +6,7 @@ class NivelesIdiomasRepo {
     // Crear un nuevo nivel de idioma
     public static function crearNivelIdioma($niveles) {
         $conexion = db::entrar();
-        $sql = "INSERT INTO niveles_idiomas (niveles) VALUES (:niveles)";
+        $sql = "INSERT INTO nivelesidiomas (niveles) VALUES (:niveles)";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':niveles', $niveles);
         $stmt->execute();
@@ -15,7 +15,7 @@ class NivelesIdiomasRepo {
 
     public static function actualizarNivelIdioma($id, $niveles) {
         $conexion = db::entrar();
-        $sql = "UPDATE niveles_idiomas SET niveles=:niveles WHERE id=:id";
+        $sql = "UPDATE nivelesidiomas SET niveles=:niveles WHERE id=:id";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':niveles', $niveles);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
@@ -25,7 +25,7 @@ class NivelesIdiomasRepo {
 
     public static function borrarNivelIdioma($id) {
         $conexion = db::entrar();
-        $sql = "DELETE FROM niveles_idiomas WHERE id=:id";
+        $sql = "DELETE FROM nivelesidiomas WHERE id=:id";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -34,7 +34,7 @@ class NivelesIdiomasRepo {
 
     public static function leerNivelIdiomaPorId($id) {
         $conexion = db::entrar();
-        $sql = "SELECT * FROM niveles_idiomas WHERE id=:id";
+        $sql = "SELECT * FROM nivelesidiomas WHERE id=:id";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -45,7 +45,7 @@ class NivelesIdiomasRepo {
 
     public static function leerTodosLosNivelesIdiomas() {
         $conexion = db::entrar();
-        $sql = "SELECT * FROM niveles_idiomas";
+        $sql = "SELECT * FROM nivelesidiomas";
         $stmt = $conexion->query($sql);
         $nivelesIdiomas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $nivelesIdiomas;
