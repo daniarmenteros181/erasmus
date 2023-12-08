@@ -107,6 +107,11 @@ class seleccionConvocatoria {
 
                         <input type="submit" name="Actualizar" value="Actualizar">
                         <input type="submit" name="DescargarPDF" value="Descargar PDF">
+                        <br>
+
+                        
+
+                      
 
                     </form>
                 </body>
@@ -219,3 +224,22 @@ class seleccionConvocatoria {
 seleccionConvocatoria::comenzar();
 
 ?>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/webCam.js"></script>
+</head>
+<body>
+    <video id="player" controls autoplay></video>
+    <button id="capture">Capture</button>
+    <canvas id="canvas" width="320" height="240"></canvas>
+
+   
+</body>
+</html>
