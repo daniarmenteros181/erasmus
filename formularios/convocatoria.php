@@ -55,8 +55,12 @@
     <div id="coge">
     <h1>Convocatoria</h1>
 
-    <form id="miFormulario" method="post" action="">
+    <form id="miFormulario" method="post" action="" >
 
+    <div id="datos">
+
+
+   
         <label for="movilidades">Movilidades:</label>
         <input type="text" id="movilidades" name="movilidades"><br><br>
 
@@ -68,20 +72,7 @@
         <br><br>
 
 
-        <label for="fechaInicio">fechaInicio:</label>
-        <input type="date" id="fechaInicio" name="fechaInicio"><br><br>
-
-        <label for="fechaFin">fechaFin:</label>
-        <input type="date" id="fechaFin" name="fechaFin"><br><br>
-
-        <label for="fechaInicioPrueba">fechaInicioPrueba:</label>
-            <input type="date" id="fechaInicioPrueba" name="fechaInicioPrueba" ><br><br>
-
-        <label for="fechaFinPrueba">fechaFinPrueba:</label>
-        <input type="date" id="fechaFinPrueba" name="fechaFinPrueba"><br><br>
-
-        <label for="fechaInicioDefinitiva">fechaInicioDefinitiva:</label>
-        <input type="date" id="correo" name="fechaInicioDefinitiva"><br><br>
+        
 
         <label for="id_destinatario">Destinatario:</label>
          <select id="id_destinatario" name="id_destinatario">
@@ -99,13 +90,8 @@
         </select>
         <br><br>
  
-        <!-- <label for="fk_proyecto">fk_proyecto:</label>
-        <input type="text" id="fk_proyecto" name="fk_proyecto"><br><br> -->
 
-        
-
-<!--         <input type="text" id="id_destinatario" name="id_destinatario" ><br><br>
- -->        
+            
 
         <label for="fk_proyecto">fk_proyecto:</label>
         <select id="fk_proyecto" name="fk_proyecto"><br><br>
@@ -124,11 +110,37 @@
         <br>
         </select>
 
-        
 
-        
+        </div>
 
+        <div id="fechas" style="display: none;">
+
+            <label for="fechaInicio">fechaInicio:</label>
+            <input type="date" id="fechaInicio" name="fechaInicio"><br><br>
+
+            <label for="fechaFin">fechaFin:</label>
+            <input type="date" id="fechaFin" name="fechaFin"><br><br>
+
+            <label for="fechaInicioPrueba">fechaInicioPrueba:</label>
+                <input type="date" id="fechaInicioPrueba" name="fechaInicioPrueba" ><br><br>
+
+            <label for="fechaFinPrueba">fechaFinPrueba:</label>
+            <input type="date" id="fechaFinPrueba" name="fechaFinPrueba"><br><br>
+
+            <label for="fechaInicioDefinitiva">fechaInicioDefinitiva:</label>
+            <input type="date" id="correo" name="fechaInicioDefinitiva"><br><br>
+        
+    
+        </div>
+
+    <br>
         <input type="submit" value="Entrar" name="entrar">
+        <br>
+
+        <input type="button" value="Atrás" name="atras" onclick="mostrarDatos()">
+        <input type="button" value="Siguiente" name="siguiente" onclick="mostrarFechas()">
+
+
         <br>
 
 
@@ -138,5 +150,21 @@
 
 
     </div>
+    <script>
+
+        function mostrarFechas() {
+            document.getElementById('datos').style.display = 'none';
+            document.getElementById('fechas').style.display = 'block';
+        }
+
+        function mostrarDatos() {
+            document.getElementById('datos').style.display = 'block';
+            document.getElementById('fechas').style.display = 'none';
+        }
+
+        
+        
+
+    </script>
     </body>
 </html>

@@ -152,7 +152,12 @@ class seleccionConvocatoria {
 
         // Insertar en la tabla candidatosconvocatoria
         candidatosConvocatoriaRepo::insertarCandidatoConvocatoria($idCandidatos, $idConvo);
-        echo "Solicitud creada correctamente.";
+/*         echo "Solicitud creada correctamente.";*/          
+/*         header("Location: ?menu=elegirConvocatoria"); 
+ */        header("Location: http://erasmus.com/?menu=elegirConvocatoria");
+        exit();
+
+
     }
 
 

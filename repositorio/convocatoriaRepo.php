@@ -22,9 +22,6 @@ class convocatoriaRepo {
         $stmt->bindParam(':fechaInicioDefinitiva', $fechaInicioDefinitiva);
         $stmt->bindParam(':fk_proyecto', $fk_proyecto);
 
-/*         $stmt->bindParam(':fk_proyecto', $fk_proyecto, PDO::PARAM_INT);
- */
-
 
         $stmt->execute();
 
@@ -51,6 +48,26 @@ class convocatoriaRepo {
       
         $stmtConvoBaremo->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
         $stmtConvoBaremo->execute();
+
+
+
+        // Insertar en la tabla convocatoriabaremoIdioma
+
+
+        // Obtener el último ID insertado en la tabla convocatoriabaremo
+        $fk_convocatoria_Baremo = $conexion->lastInsertId();
+        $fk_niveles_idiomas = 1; // Ajusta según tus necesidades
+
+        $sqlConvoBaremoIdioma = "INSERT INTO convocatoriabaremoidioma (fk_niveles_idiomas, fk_convocatoria_Baremo) VALUES (:fk_niveles_idiomas, :fk_convocatoria_Baremo)";
+        $stmtConvoBaremoIdioma = $conexion->prepare($sqlConvoBaremoIdioma);
+
+        $stmtConvoBaremoIdioma->bindParam(':fk_niveles_idiomas', $fk_niveles_idiomas, PDO::PARAM_INT);
+        $stmtConvoBaremoIdioma->bindParam(':fk_convocatoria_Baremo', $fk_convocatoria_Baremo, PDO::PARAM_INT);
+
+        $stmtConvoBaremoIdioma->execute();
+
+
+
 
         // Confirmar la transacción
         $conexion->commit();
