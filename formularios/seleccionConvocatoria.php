@@ -26,11 +26,11 @@ class seleccionConvocatoria {
             {
                 // Procesar creación de candidato
                 self::procesarCreacion();
-            }elseif (isset($_POST['DescargarPDF'])) 
+            }/* elseif (isset($_POST['DescargarPDF'])) 
             {
                 // Descargar el PDF automáticamente
                 self::descargarPDF($candidato);
-            } elseif (isset($_POST['Actualizar'])) 
+            } */ elseif (isset($_POST['Actualizar'])) 
             {
                 // Procesar actualización de candidato
                 self::procesarActualizacion();
@@ -52,6 +52,8 @@ class seleccionConvocatoria {
 
 
             $id = convocatoriaRepo::obtenerIdCandidato();
+
+
 
 
               // Obtener los datos del candidato por ID
@@ -120,6 +122,11 @@ class seleccionConvocatoria {
                 <?php
             }
 
+            if (isset($_POST['DescargarPDF'])) {
+                // Descargar el PDF automáticamente
+                self::descargarPDF($candidato);
+            }
+
 
 
              
@@ -181,6 +188,10 @@ class seleccionConvocatoria {
     private static function descargarPDF($candidato) {
         // Código para generar el PDF con los datos del candidato y descargarlo
         require_once '../vendor/autoload.php';
+
+        // Obtener datos de la convocatoria
+       /*  $idConvoo = $candidato['idConvoo'];  // Ajusta esto según cómo estén almacenados los datos en tu base de datos
+        $convocatoria = convocatoriaRepo::obtenerDatosConvocatoria($idConvoo); */
  
         $html = '
         <html>
@@ -192,6 +203,13 @@ class seleccionConvocatoria {
             <h2>Datos del Candidato</h2>
             <p>ID: ' . $candidato['id'] . '</p>
             <p>DNI: ' . $candidato['dni'] . '</p>
+            <p>Fecha de Nacimiento: ' . $candidato['fechaNac'] . '</p>
+            <p>Nombre: ' . $candidato['nombre'] . '</p>
+            <p>Apellidos: ' . $candidato['apellidos'] . '</p>
+            <p>Domicilio: ' . $candidato['domicilio'] . '</p>
+            <p>Convocatoria: ' . $convocatoria['idConvoo'] . '</p>
+
+
             <!-- Resto de los campos -->
         </body>
         </html>';
@@ -227,7 +245,7 @@ seleccionConvocatoria::comenzar();
 
 
 
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -243,3 +261,4 @@ seleccionConvocatoria::comenzar();
    
 </body>
 </html>
+ 

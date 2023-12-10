@@ -212,7 +212,7 @@ class convocatoriaRepo {
     }
 
     
-    public static function obtenerIdCandidato() {
+     public static function obtenerIdCandidato() {
         $conexion = db::entrar();
     
         // Lógica para obtener el ID del destinatario desde la base de datos
@@ -230,7 +230,40 @@ class convocatoriaRepo {
         }
     
         return $id;
+    } 
+
+    /* public static function obtenerIdDestinatario() {
+        // Supongamos que tienes una función en tu clase db (db::entrar()) que inicia la conexión a la base de datos
+        $conexion = db::entrar();
+
+        // Lógica para obtener el ID del destinatario desde la base de datos
+        $id = self::obtenerIdCandidatoDesdeBaseDeDatos($conexion);
+
+        // Imprime o devuelve el ID del destinatario (puedes comentar o eliminar la línea de echo si no necesitas imprimirlo)
+        echo ("id de candidato:, $id");
+
+        return $id;
     }
+
+    private static function obtenerIdCandidatoDesdeBaseDeDatos($conexion) {
+        // Aquí implementa la lógica para obtener el ID del candidato desde la base de datos
+        // Ajusta esto según la estructura real de tu base de datos y lógica de la aplicación
+    
+        // Supongamos que la tabla candidato tiene un campo id_candidato y un campo nombre_usuario
+        $sql = "SELECT id FROM candidatos WHERE nombre = :nombreUsuario"; // Ajusta la consulta según tu estructura
+        $stmt = $conexion->prepare($sql);
+    
+        // Aquí vinculamos parámetros si es necesario
+        $stmt->bindParam(':nombreUsuario', $_SESSION['nombreUsuario']); // Ajusta según la variable de sesión que contiene el nombre de usuario
+    
+        $stmt->execute();
+    
+        // Obtener el resultado
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Retornar el ID del candidato o null si no se encuentra
+        return $resultado['id'] ?? null;
+    } */
     
     
 
