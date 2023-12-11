@@ -50,14 +50,12 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         // Obtener datos del cuerpo de la solicitud
         $datos = json_decode(file_get_contents("php://input"), true);
 
-        // Validar datos
-         if (empty($datos['id']) /* || empty($datos['dni']) || empty($datos['nombre']) */) {
+         /* // Validar datos
+         if (empty($datos['id'])  || empty($datos['dni']) || empty($datos['nombre']) ) {
             header('HTTP/1.1 400 Bad Request');
             echo json_encode(['error' => 'Datos incompletos o incorrectos']);
             exit();
-        } 
-
-       
+        }  */ 
 
         // Obtener los datos del candidato
         $id = $datos['id'];
