@@ -126,42 +126,12 @@ class convocatoriaRepo {
 
      public static function borrarConvocatoria($id) {
         $conexion = db::entrar();
-    
-        try {
-            $conexion->beginTransaction();
-    
-             // Eliminar la entrada correspondiente en la tabla destinatarioconvocatoria
-             $sqlBorrarDestinatario = "DELETE FROM destinatarioconvocatoria WHERE id_convocatoria = :id_convocatoria";
-             $stmtBorrarDestinatario = $conexion->prepare($sqlBorrarDestinatario);
-             $stmtBorrarDestinatario->bindParam(':id_convocatoria', $id, PDO::PARAM_INT);
-             $stmtBorrarDestinatario->execute();
 
-            // Eliminar la entrada correspondiente en la tabla convocatoriabaremo
-            $sqlBorrarBaremo = "DELETE FROM convocatoriabaremo WHERE id_convocatoria = :id_convocatoria";
-            $stmtBorrarBaremo = $conexion->prepare($sqlBorrarBaremo);
-            $stmtBorrarBaremo->bindParam(':id_convocatoria', $id, PDO::PARAM_INT);
-            $stmtBorrarBaremo->execute();
-    
-            // Eliminar la entrada correspondiente en la tabla candidatosconvocatoria
-            $sqlBorrarCandiConv = "DELETE FROM candidatosconvocatoria WHERE id_convocatoria = :id_convocatoria";
-            $stmtBorrarCandiConv = $conexion->prepare($sqlBorrarCandiConv);
-            $stmtBorrarCandiConv->bindParam(':id_convocatoria', $id, PDO::PARAM_INT);
-            $stmtBorrarCandiConv->execute();
-
-
-            // Eliminar la convocatoria de la tabla convocatoria
-            $sqlBorrarConvocatoria = "DELETE FROM convocatoria WHERE id=:id";
-            $stmtBorrarConvocatoria = $conexion->prepare($sqlBorrarConvocatoria);
-            $stmtBorrarConvocatoria->bindParam(':id', $id, PDO::PARAM_INT);
-            $stmtBorrarConvocatoria->execute();
-    
-            // Confirmar la transacción
-            $conexion->commit();
-        } catch (Exception $e) {
-            // Paso 6: Manejar cualquier excepción y realizar un rollback si es necesario
-            $conexion->rollBack();
-            echo "Error: " . $e->getMessage();
-        }
+        // Eliminar la convocatoria de la tabla convocatoria
+        $sqlBorrarConvocatoria = "DELETE FROM convocatoria WHERE id=:id";
+        $stmtBorrarConvocatoria = $conexion->prepare($sqlBorrarConvocatoria);
+        $stmtBorrarConvocatoria->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmtBorrarConvocatoria->execute();
     } 
     
 
@@ -213,7 +183,7 @@ class convocatoriaRepo {
 
             // Botón de borrar con un formulario para evitar enlaces directos
         echo "<td>";
-            echo "<form method='post' action='../formularios/seleccionConvocatoria.php'>";  
+            echo "<form method='post' action='../formularios/obtencion.php'>";  
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
             echo "<input type='submit' value='Elegir'>";
             echo "</form>";

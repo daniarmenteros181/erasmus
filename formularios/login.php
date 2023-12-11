@@ -32,7 +32,7 @@ class login{
     <div id="coge">
     <h1>Inicio Sesion</h1>
 
-    <form id="miFormulario" method="post" action="">
+    <form id="miFormulario" method="post" action="" >
 
         <label for="nombre">Usuario:</label>
         <input type="text" id="nombre" name="nombre"><br><br>
