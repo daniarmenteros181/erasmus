@@ -54,10 +54,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+
 // Función para llenar el formulario con los datos del candidato
 function llenarFormulario(candidato) {
-/*     document.getElementById('id').value = candidato.id;
- */    document.getElementById('dni').value = candidato.dni;
+    document.getElementById('dni').value = candidato.dni;
     document.getElementById('fechaNac').value = candidato.fechaNac;
     document.getElementById('apellidos').value = candidato.apellidos;
     document.getElementById('nombre').value = candidato.nombre;
