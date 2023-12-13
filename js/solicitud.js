@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // Obtener el ID del candidato desde la URL o de alguna otra fuente
+    // Obtener el ID del candidato 
     var idCandidato = document.getElementById('idCandidato').value;
+    // Obtener la ID de la convocatoria 
+    var idConvo = document.getElementById('idConvo').value;
+
 
     // Hacer la solicitud a la API para obtener los datos del candidato
     fetch(`http://erasmus.com/api/candidatosApi.php?id=${idCandidato}`)
@@ -47,11 +50,40 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.error('Error:', data.error);
                 } else {
                     console.log('Datos del candidato actualizado:', data.candidato);
-                    alert('Candidato actualizado correctamente');
+                    alert('Candidato actualizado correctamente' + 'id candidato: '+idCandidato +'convocatoria: '+idConvo);
                 }
             })
             .catch(error => console.error('Error en la solicitud:', error));
-    });
+
+
+
+
+            
+        // Hacer la solicitud a la API para crear la solicitud
+        fetch('http://erasmus.com/api/candidatosConvocatoriaApi.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id_candidatos: idCandidato,
+                id_convocatoria: idConvo
+            })
+        })
+
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    console.error('Error:', data.error);
+                } else {
+                    console.log('Candidato insertado en la convocatoria:', data.mensaje);
+                    alert('Candidato insertado correctamente en la convocatoria');
+                }
+            })
+            .catch(error => console.error('Error en la solicitud:', error));
+
+
+            });
 });
 
 

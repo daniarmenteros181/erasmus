@@ -1,3 +1,4 @@
+
 <?php
 
 
@@ -17,50 +18,59 @@
             $fechaFinPrueba = $_POST["fechaFinPrueba"];
             $fechaInicioDefinitiva = $_POST["fechaInicioDefinitiva"];
             $fk_proyecto = $_POST["fk_proyecto"];
-            $id_destinatario = $_POST["id_destinatario"];                
+            $id_destinatario = $_POST["id_destinatario"]; 
+            $requisito = isset($_POST["requisito"]) ? 1 : 0;
+            //Para las notas
+            $notas = isset($_POST["notas"]) ? 1 : 0;
+            $notaMaxima = $_POST["notaMaxima"];   
+            $valorMinimo = $_POST["valorMinimo"];   
+            
+            //Para entrevista
+            $entrevista = isset($_POST["entrevista"]) ? 1 : 0;
+            $notaMaximaEntrevista = $_POST["notaMaximaEntrevista"];   
+            $valorMinimoEntrevista = $_POST["valorMinimoEntrevista"]; 
+
+
+/*             $entrevista = isset($_POST["entrevista"]) ? 1 : 0;
+$notaMaximaEntrevista = isset($_POST["notaMaximaEntrevista"]) ? $_POST["notaMaximaEntrevista"] : null;
+$valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorMinimoEntrevista"] : null; */
+
+             
+
+          
+
+               
         
             // Llamada a la función para crear un nuevo candidato
-            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario);
+            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario ,$requisito ,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista);
         
         }
 
-
     }
-
-   
-
- 
-    
-
-
 
  }
  convocatoria::comenzar();
 
-
-
-
 ?>
 
-
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Registro </title>
-    <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Dividido</title>
+        <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
+         <link rel="stylesheet" href="../js/convo.js">
 
- </head>
+
+    
+</head>
 <body>
 
-    <div id="coge">
-    <h1>Convocatoria</h1>
-
-    <form id="miFormulario" method="post" action="" >
+<form id="miFormulario" method="post" action="">
 
     <div id="datos">
 
-
-   
         <label for="movilidades">Movilidades:</label>
         <input type="text" id="movilidades" name="movilidades"><br><br>
 
@@ -70,9 +80,6 @@
             <option value="larga">Larga</option>
         </select>
         <br><br>
-
-
-        
 
         <label for="id_destinatario">Destinatario:</label>
          <select id="id_destinatario" name="id_destinatario">
@@ -89,9 +96,6 @@
         ?>
         </select>
         <br><br>
- 
-
-            
 
         <label for="fk_proyecto">fk_proyecto:</label>
         <select id="fk_proyecto" name="fk_proyecto"><br><br>
@@ -110,15 +114,132 @@
         <br>
         </select>
 
+        <input type="button" value="Siguiente" name="siguiente3" onclick="mostrarElementosBaremo()">
+    </div>
 
+
+
+
+
+    <div id="elementosBaremo" style="display: none;">
+        <label for="nivelIdioma">Nivel de Idioma:</label>
+        <input type="checkbox" id="nivelIdioma" name="nivelIdioma" value="nivelIdioma" onchange="mostrarCamposNivelIdioma(this)">
+
+          <!-- Nuevos campos para mostrar cuando se selecciona "Nivel de Idioma" -->
+    <div id="camposNivelIdioma" style="display: none;">
+        
+        <!-- Mostrar campos para cada nivel -->
+        <label for="valorNivelIdioma">Valor Nivel de Idioma:</label>
+        <input type="text" id="valorNivelIdioma" name="valorNivelIdioma"><br><br>
+
+        <label for="valorNivelIdiomaA1">Valor Nivel A1:</label>
+        <input type="text" id="valorNivelIdiomaA1" name="valorNivelIdiomaA1"><br><br>
+
+        <label for="valorNivelIdiomaA2">Valor Nivel A2:</label>
+        <input type="text" id="valorNivelIdiomaA2" name="valorNivelIdiomaA2"><br><br>
+
+        <label for="valorNivelIdiomaB1">Valor Nivel B1:</label>
+        <input type="text" id="valorNivelIdiomaB1" name="valorNivelIdiomaB1"><br><br>
+
+        <label for="valorNivelIdiomaB2">Valor Nivel B2:</label>
+        <input type="text" id="valorNivelIdiomaB2" name="valorNivelIdiomaB2"><br><br>
+
+        <label for="valorNivelIdiomaC1">Valor Nivel C1:</label>
+        <input type="text" id="valorNivelIdiomaC1" name="valorNivelIdiomaC1"><br><br>
+
+        <label for="valorNivelIdiomaC2">Valor Nivel C2:</label>
+        <input type="text" id="valorNivelIdiomaC2" name="valorNivelIdiomaC2"><br><br>
+    </div>
+     
+
+        <!-- <label for="entrevista">Entrevista:</label>
+        <input type="checkbox" id="entrevista" name="entrevista" value="entrevista"onchange="mostrarCamposEntrevista(this)">
+
+          Nuevos campos para mostrar cuando se selecciona "Entrevista"
+          <div id="camposEntrevista" style="display: none;">
+            <label for="notaMaxima">Nota Máxima:</label>
+            <input type="text" id="notaMaxima" name="notaMaxima"><br><br>
+
+            <label for="valorMinimo">Valor Mínimo:</label>
+            <input type="text" id="valorMinimo" name="valorMinimo"><br><br>
+
+            <label for="aporteAlumno">Aporte Alumno:</label>
+            <input type="checkbox" id="aporteAlumno" name="aporteAlumno" value="aporteAlumno">
+
+            <label for="ficheroIdoneidad">Fichero de Idoneidad:</label>
+            <input type="checkbox" id="ficheroIdoneidad" name="ficheroIdoneidad" value="ficheroIdoneidad">
+        </div>  -->
+
+
+        <label for="entrevista">Entrevista:</label>
+        <input type="checkbox" id="entrevista" name="entrevista" value="entrevista" onchange="mostrarCamposEntrevista(this)">
+
+        <!-- Nuevos campos para mostrar cuando se selecciona "Entrevista" -->
+        <div id="camposEntrevista" style="display: none;">
+            <label for="notaMaximaEntrevista">Nota Máxima:</label>
+            <input type="text" id="notaMaximaEntrevista" name="notaMaximaEntrevista"><br><br>
+
+            <label for="valorMinimoEntrevista">Valor Mínimo:</label>
+            <input type="text" id="valorMinimoEntrevista" name="valorMinimoEntrevista"><br><br>
+
+            <label for="aporteAlumnoEntrevista">Aporte Alumno:</label>
+            <input type="checkbox" id="aporteAlumnoEntrevista" name="aporteAlumnoEntrevista" value="aporteAlumno">
+
+            <label for="ficheroIdoneidadEntrevista">Fichero de Idoneidad:</label>
+            <input type="checkbox" id="ficheroIdoneidadEntrevista" name="ficheroIdoneidadEntrevista" value="ficheroIdoneidad">
         </div>
 
-        <div id="fechas" style="display: none;">
+        
 
-            <label for="fechaInicio">fechaInicio:</label>
-            <input type="date" id="fechaInicio" name="fechaInicio"><br><br>
+        <label for="notas">Notas:</label>
+        <input type="checkbox" id="notas" name="notas" value="notas" onchange="mostrarCamposNotas(this)">
 
-            <label for="fechaFin">fechaFin:</label>
+         <!-- Nuevos campos para mostrar cuando se selecciona "Notas" -->
+        <div id="camposNotas" style="display: none;">
+            <label for="notaMaxima">Nota Máxima:</label>
+            <input type="text" id="notaMaxima" name="notaMaxima"><br><br>
+
+            <label for="valorMinimo">Valor Mínimo:</label>
+            <input type="text" id="valorMinimo" name="valorMinimo"><br><br>
+
+            <label for="aporteAlumno">Aporte Alumno:</label>
+            <input type="checkbox" id="aporteAlumnoNotas" name="aporteAlumnoNotas" value="aporteAlumno">
+
+            <label for="ficheroIdoneidad">Fichero de Idoneidad:</label>
+            <input type="checkbox" id="ficheroIdoneidadNotas" name="ficheroIdoneidadNotas" value="ficheroIdoneidad">
+        </div> 
+
+        <label for="requisito">Requisito:</label>
+        <input type="checkbox" id="requisito" name="requisito" value="requisito" >
+
+        <!-- Nuevos campos para mostrar cuando se selecciona "Requisito" -->
+    <!-- <div id="camposRequisito" style="display: none;">
+        <label for="requisito1">Requisito 1:</label>
+        <input type="text" id="requisito1" name="requisito1"><br><br>
+
+        <label for="requisito2">Requisito 2:</label>
+        <input type="text" id="requisito2" name="requisito2"><br><br>
+
+        <label for="observacionesRequisito">Observaciones:</label>
+        <textarea id="observacionesRequisito" name="observacionesRequisito"></textarea>
+    </div> -->
+
+    <input type="button" value="Anterior" name="anterior" onclick="mostrarDatos()">
+    <input type="button" value="Siguiente" name="siguiente" onclick="mostrarFechas()">
+</div>
+
+    </div>
+
+
+
+
+
+
+    <div id="fechas" style="display: none;">
+        <label for="fechaInicio">fechaInicio:</label>
+        <input type="date" id="fechaInicio" name="fechaInicio"><br><br>
+
+        <label for="fechaFin">fechaFin:</label>
             <input type="date" id="fechaFin" name="fechaFin"><br><br>
 
             <label for="fechaInicioPrueba">fechaInicioPrueba:</label>
@@ -129,42 +250,76 @@
 
             <label for="fechaInicioDefinitiva">fechaInicioDefinitiva:</label>
             <input type="date" id="correo" name="fechaInicioDefinitiva"><br><br>
-        
-    
-        </div>
 
-    <br>
+
+        <input type="button" value="Anterior" name="anterior" onclick="mostrarElementosBaremo()">
         <input type="submit" value="Entrar" name="entrar">
-        <br>
-
-        <input type="button" value="Atrás" name="atras" onclick="mostrarDatos()">
-        <input type="button" value="Siguiente" name="siguiente" onclick="mostrarFechas()">
-
-
-        <br>
-
-
-
-        
-    </form>
-
-
     </div>
-    <script>
+</form>
 
-        function mostrarFechas() {
-            document.getElementById('datos').style.display = 'none';
-            document.getElementById('fechas').style.display = 'block';
-        }
 
-        function mostrarDatos() {
-            document.getElementById('datos').style.display = 'block';
-            document.getElementById('fechas').style.display = 'none';
-        }
 
-        
-        
 
-    </script>
-    </body>
+<script>
+
+    
+    function mostrarElementosBaremo() {
+        document.getElementById('datos').style.display = 'none';
+        document.getElementById('elementosBaremo').style.display = 'block';
+        document.getElementById('fechas').style.display = 'none';
+    }
+
+    function mostrarDatos() {
+        document.getElementById('datos').style.display = 'block';
+        document.getElementById('elementosBaremo').style.display = 'none';
+        document.getElementById('fechas').style.display = 'none';
+    }
+
+    function mostrarFechas() {
+        document.getElementById('datos').style.display = 'none';
+        document.getElementById('elementosBaremo').style.display = 'none';
+        document.getElementById('fechas').style.display = 'block';
+    }
+
+    function atras2() {
+        mostrarDatos();
+    }
+
+    function siguiente2() {
+        mostrarFechas();
+    }
+
+    function atras3() {
+        mostrarElementosBaremo();
+    }
+
+    function siguiente3() {
+        // Puedes agregar lógica adicional o enviar el formulario aquí
+        alert('Formulario enviado');
+    }
+
+
+
+    function mostrarCamposEntrevista(checkbox) {
+        var camposEntrevista = document.getElementById('camposEntrevista');
+        camposEntrevista.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    function mostrarCamposNotas(checkbox) {
+        var camposNotas = document.getElementById('camposNotas');
+        camposNotas.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    function mostrarCamposRequisito(checkbox) {
+        var camposRequisito = document.getElementById('camposRequisito');
+        camposRequisito.style.display = checkbox.checked ? 'block' : 'none';
+    }
+
+    function mostrarCamposNivelIdioma(checkbox) {
+        var camposNivelIdioma = document.getElementById('camposNivelIdioma');
+        camposNivelIdioma.style.display = checkbox.checked ? 'block' : 'none';
+    }
+</script>
+
+</body>
 </html>

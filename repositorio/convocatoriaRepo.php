@@ -4,11 +4,17 @@
 class convocatoriaRepo {
 
 
- public static function crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario) {
+ public static function crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario,$requisito,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista) {
     $conexion = db::entrar();
 
     try {
         $conexion->beginTransaction();
+
+        
+        /* $infoRequisito = self::obtenerInfoItemBaremo("Requisito");
+        $infoRequisito = self::obtenerInfoItemBaremo("Requisito"); */
+
+
 
         // Paso 1: Insertar en la tabla convocatoria
         $sql = "INSERT INTO convocatoria (movilidades, tipo, fechaInicio, fechaFin, fechaInicioPrueba, fechaFinPrueba, fechaInicioDefinitiva, fk_proyecto) VALUES (:movilidades, :tipo, :fechaInicio, :fechaFin, :fechaInicioPrueba, :fechaFinPrueba, :fechaInicioDefinitiva, :fk_proyecto)";
@@ -39,21 +45,46 @@ class convocatoriaRepo {
         $stmtDestinatario->execute();
 
 
+// Insertar en la tabla convocatoriabaremo para Requisito
+if ($requisito) {
+    $infoRequisito = self::obtenerInfoItemBaremo("Requisito");
+    $sqlConvoBaremoRequisito = "INSERT INTO convocatoriabaremo (id_convocatoria, requisito, fk_item_baremo) VALUES (:id_convocatoria, :requisito, :fk_item_requisito)";
+    $stmtConvoBaremoRequisito = $conexion->prepare($sqlConvoBaremoRequisito);
+    $stmtConvoBaremoRequisito->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+    $stmtConvoBaremoRequisito->bindParam(':requisito', $requisito);
+    $stmtConvoBaremoRequisito->bindParam(':fk_item_requisito', $infoRequisito['id'], PDO::PARAM_INT);
 
+    $stmtConvoBaremoRequisito->execute();
+}
 
-        // Insertar en la tabla convocatoriabaremo
-        $sqlConvoBaremo = "INSERT INTO convocatoriabaremo (id_convocatoria) VALUES (:id_convocatoria)";
-        $stmtConvoBaremo = $conexion->prepare($sqlConvoBaremo);
-        
-      
-        $stmtConvoBaremo->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
-        $stmtConvoBaremo->execute();
+// Insertar en la tabla convocatoriabaremo para Notas
+if ($notas) {
+    $infoNotas = self::obtenerInfoItemBaremo("Notas");
+    $sqlConvoBaremoNotas = "INSERT INTO convocatoriabaremo (id_convocatoria,  fk_item_baremo, notaMaxima, valorMinimo) VALUES (:id_convocatoria, :fk_item_notas, :notaMaxima, :valorMinimo)";
+    $stmtConvoBaremoNotas = $conexion->prepare($sqlConvoBaremoNotas);
+    $stmtConvoBaremoNotas->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+    $stmtConvoBaremoNotas->bindParam(':fk_item_notas', $infoNotas['id'], PDO::PARAM_INT);
+    $stmtConvoBaremoNotas->bindParam(':notaMaxima', $notaMaxima, PDO::PARAM_INT);
+    $stmtConvoBaremoNotas->bindParam(':valorMinimo', $valorMinimo, PDO::PARAM_INT);     
+    
+    $stmtConvoBaremoNotas->execute();
+}
 
+// Insertar en la tabla convocatoriabaremo para Entrevista
+if ($entrevista) {
+    $infoEntrevista = self::obtenerInfoItemBaremo("Entrevista");
+    $sqlConvoBaremoEntrevista = "INSERT INTO convocatoriabaremo (id_convocatoria, fk_item_baremo, notaMaxima, valorMinimo) VALUES (:id_convocatoria, :fk_item_entrevista, :notaMaximaEntrevista, :valorMinimoEntrevista)";
+    $stmtConvoBaremoEntrevista = $conexion->prepare($sqlConvoBaremoEntrevista);
+    $stmtConvoBaremoEntrevista->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+    $stmtConvoBaremoEntrevista->bindParam(':fk_item_entrevista', $infoEntrevista['id'], PDO::PARAM_INT);
+    $stmtConvoBaremoEntrevista->bindParam(':notaMaximaEntrevista', $notaMaximaEntrevista, PDO::PARAM_INT);
+    $stmtConvoBaremoEntrevista->bindParam(':valorMinimoEntrevista', $valorMinimoEntrevista, PDO::PARAM_INT);
+
+    $stmtConvoBaremoEntrevista->execute();
+}
 
 
         // Insertar en la tabla convocatoriabaremoIdioma
-
-
         // Obtener el último ID insertado en la tabla convocatoriabaremo
         $fk_convocatoria_Baremo = $conexion->lastInsertId();
         $fk_niveles_idiomas = 1; // Ajusta según tus necesidades
@@ -66,9 +97,6 @@ class convocatoriaRepo {
 
         $stmtConvoBaremoIdioma->execute();
 
-
-
-
         // Confirmar la transacción
         $conexion->commit();
     } catch (Exception $e) {
@@ -78,14 +106,29 @@ class convocatoriaRepo {
     } finally {
         // Paso 6: Cerrar los cursores
         $stmt->closeCursor();
-        $stmtDestinatario->closeCursor();
-    }
+/*         $stmtDestinatario->closeCursor();
+ */    }
 }
 
 
 
 
+public static function obtenerInfoItemBaremo($nombreItem) {
+    // Conéctate a la base de datos (ajusta según tu configuración)
+    $conexion = db::entrar();
 
+    // Consulta para obtener la información del ítem del baremo
+    $sql = "SELECT id, nombre FROM itembaremo WHERE nombre = :nombre";
+    $stmt = $conexion->prepare($sql);
+    $stmt->bindParam(':nombre', $nombreItem, PDO::PARAM_STR);
+    $stmt->execute();
+
+    // Obtiene el resultado como un array asociativo
+    $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // Devuelve la información del ítem del baremo o false si no se encuentra
+    return $resultado ? $resultado : false;
+}
 
 
     /*  // Actualizar una convocatoria existente por ID

@@ -11,11 +11,11 @@ class seleccionConvocatoria {
 
     public static function comenzar() {
 
-        // Obtener la ID del candidato (puedes ajustar cómo obtienes esto según tu aplicación)
+        // Obtener la ID del candidato 
         $idConvo = isset($_GET['idConvo']) ? intval($_GET['idConvo']) : null;
         $idCandidato = isset($_GET['idCandidato']) ? intval($_GET['idCandidato']) : null;
           
-        // Mostrar el formulario con los datos del candidato
+        // Mostrar el formulario 
         ?>
 
         <!DOCTYPE html>
@@ -61,11 +61,16 @@ class seleccionConvocatoria {
         <label for="rol">Rol:</label>
         <input type="text" id="rol" name="rol"><br>
 
+<!--         Paso al js los id del candidato y convocatoria-->        
         <input type="hidden" id="idCandidato" name="id" value="<?php echo $idCandidato; ?>">
+        <input type="hidden" id="idConvo" name="idConvo" value="<?php echo $idConvo; ?>">
+
 
 
         <input type="submit" name="Actualizar" value="Actualizar">
         <input type="submit" name="DescargarPDF" value="Descargar PDF">
+        <input type="submit" name="Crear" value="Crear">
+
         <br>
         
     </form>
@@ -78,9 +83,18 @@ class seleccionConvocatoria {
      
              
         }
+
+        
                       
     } 
 
 seleccionConvocatoria::comenzar();
 
+
+
+
+
 ?>
+
+
+
