@@ -2,14 +2,29 @@
 
 require_once '../repositorio/db.php'; 
 require_once '../helpers/sesion.php'; 
+require_once './mostrarMenu.php'; 
 
+
+use Dompdf\Dompdf;
 
 
 sesion::iniciaSesion();
 
 class seleccionConvocatoria {
 
+
     public static function comenzar() {
+
+        mostrarMenu::mostrarMenuAlumno();
+
+
+        // Verificar si se envió el formulario
+      /*   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['descargarPDF'])) {
+                // Descargar el PDF automáticamente
+                self::descargarPDF();
+            }
+        } */
 
         // Obtener la ID del candidato 
         $idConvo = isset($_GET['idConvo']) ? intval($_GET['idConvo']) : null;
@@ -24,12 +39,12 @@ class seleccionConvocatoria {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Editar Candidato</title>
-            <script src="../js/solicitud.js"></script>
-        </head>
+             <script src="../js/solicitud.js"></script>
+         </head>
         <body>
         <h2>Editar Candidato</h2>
 
-        <form id="candidatoForm">
+        <form id="candidatoForm" method="post" action="">
         <label for="dni">DNI:</label>
         <input type="text" id="dni" name="dni"><br>
 
@@ -67,9 +82,8 @@ class seleccionConvocatoria {
 
 
 
-        <input type="submit" name="Actualizar" value="Actualizar">
-        <input type="submit" name="DescargarPDF" value="Descargar PDF">
-        <input type="submit" name="Crear" value="Crear">
+        <input type="submit" name="Actualizar" value="Crear">
+        <input type="submit" name="descargarPDF" value="Descargar PDF">
 
         <br>
         
@@ -82,6 +96,60 @@ class seleccionConvocatoria {
     <?php
      
              
+        }
+
+
+        public static function descargarPDF(/* $candidato */) {
+            // Código para generar el PDF con los datos del candidato y descargarlo
+            require_once '../vendor/autoload.php';
+    
+            // Obtener datos de la convocatoria
+           /*  $idConvoo = $candidato['idConvoo'];  // Ajusta esto según cómo estén almacenados los datos en tu base de datos
+            $convocatoria = convocatoriaRepo::obtenerDatosConvocatoria($idConvoo); */
+     
+            $html = '
+            <html>
+            <head>
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <title>Datos del Candidato</title>
+            </head>
+            <body>
+                <h2>Datos del Candidato</h2>
+                <p>ID: ' . $candidato['id'] . '</p>
+                <p>DNI: ' . $candidato['dni'] . '</p>
+                <p>Fecha de Nacimiento: ' . $candidato['fechaNac'] . '</p>
+                <p>Nombre: ' . $candidato['nombre'] . '</p>
+                <p>Apellidos: ' . $candidato['apellidos'] . '</p>
+                <p>Domicilio: ' . $candidato['domicilio'] . '</p>
+                <p>Convocatoria: ' . $convocatoria['idConvoo'] . '</p>
+    
+    
+                <!-- Resto de los campos -->
+            </body>
+            </html>';
+    
+            $mipdf = new Dompdf();
+            $mipdf->set_paper("A4", "portrait");
+            $mipdf->load_html($html);
+            $mipdf->render();
+    
+            // Obtén el contenido del PDF generado
+            $pdf = $mipdf->output();
+    
+            // Configura el nombre del archivo
+            $filename = "Candidato_" . $candidato['id'] . ".pdf";
+    
+            // Descargar el PDF al navegador
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Length: ' . strlen($pdf));
+            header('Content-Transfer-Encoding: binary');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            ob_clean();
+            flush();
+            echo $pdf;
+            exit;
         }
 
         

@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         
                     </div>
             </div>
+            
             <div id="ter">
             <div id="quien">
                         <?php
@@ -48,10 +49,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "¡Bienvenido, $nombreUsuario!";
 
                         ?>
-                        <form method="post" action="">
-                            <!-- Otros elementos del formulario, si es necesario -->
-                            <input type="submit" class="out" value="out" class="cierre" name="out">
-                        </form>
+                        
+
+            </div>
+
+            <div id="cuar">
+            <form method="post" action="">
+                <input type="submit" class="out" value="out" class="cierre" name="out">
+            </form>
+
 
             </div>
 

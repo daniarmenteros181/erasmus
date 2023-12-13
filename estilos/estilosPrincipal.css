@@ -12,16 +12,31 @@ header {
   justify-content: space-between; /* Add justify-content property */
   align-items: center; /* Center items vertically */
 
-
-
-
 }
 
- #primer {
+#primer {
   display: flex;
   align-items: center;
 }  
 
+#ter{
+  display: flex;
+  align-items: end;
+  margin-right: 179px;
+}
+
+/* Para ver quien se loguea */
+#quien{
+  color: white;
+
+}
+
+#cuar {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  
+}  
 
 #ola{
   max-width: 180px; /* Ensure the image doesn't exceed its natural size */
@@ -37,11 +52,7 @@ header {
   align-items: start;
 }
 
-#ter{
-  display: flex;
-  align-items: end;
-  margin-right: 179px;
-}
+
 
 .btn{
   padding: 10px 20px;
@@ -162,11 +173,7 @@ footer {
 
 }
 
-/* Para ver quien se loguea */
-#quien{
-  color: white;
 
-}
 
 .cierre {
   display: block;
