@@ -16,4 +16,7 @@ function mostrarFormularioTutor() {
         // Ocultar el formulario del tutor
         document.getElementById('formularioTutor').style.display = 'none';
     }
+
+
+    
 }

@@ -30,10 +30,11 @@ class registro{
             $domicilioTutor = $_POST["domicilioTutor"];
          
             // Llamada a la función para crear un nuevo candidato
-            CandidatosRepo::crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $telefono, $correo, $domicilio,$fk_destinatario, $contra, 'alum');
+            CandidatosRepo::crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $telefono, $correo, $domicilio,$fk_destinatario, $contra, 'usuario');
+
+            /* TutorRepo::crearTutor($dniTutor, $nombreTutor, $apellidosTutor, $tutorTelefono, $domicilioTutor);*/
         
-/*              TutorRepo::crearTutor($dniTutor, $nombreTutor, $apellidosTutor, $tutorTelefono, $domicilioTutor);
- */         
+    
             
         }
         
@@ -58,15 +59,15 @@ class registro{
 <head>
     <title>Registro </title>
     <script src="../js/candidatoTutor.js"></script>
-<!--     <link rel="stylesheet" href="../estilos/estilosLogin.css">
- --></head>
+     <link rel="stylesheet" href="../estilos/estilosLogin.css">
+ </head>
 <body>
 
     <div id="coge">
     <h1>Registro</h1>
 
     <form id="miFormulario" method="post" action="">
-<!--     <form id="miFormulario" method="post" action=""onsubmit="mostrarFormularioTutor(); return true;">-->
+    <div id="seccion1">
 
         <label for="dni">Dni:</label>
         <input type="text" id="dni" name="dni"><br><br>
@@ -80,8 +81,7 @@ class registro{
         <label for="contra">Contraseña:</label>
         <input type="text" id="contra" name="contra"><br><br>
 
-        <label for="fechaNac">Fecha de Nacimiento:</label>
-            <input type="date" id="fechaNac" name="fechaNac" onchange="mostrarFormularioTutor();" required><br><br>
+        
 
         
         <label for="fk_destinatario">Curso:</label>
@@ -100,7 +100,9 @@ class registro{
         </select>
         <br><br>
 
+    </div>
 
+    <div id="seccion2" style="display: none;">
 
         <label for="telefono">Telefono:</label>
         <input type="number" id="telefono" name="telefono"><br><br>
@@ -110,13 +112,16 @@ class registro{
 
         <label for="domicilio">Domicilio:</label>
         <input type="text" id="domicilio" name="domicilio"><br><br>
+        <label for="fechaNac">Fecha de Nacimiento:</label>
+
+
+        <input type="date" id="fechaNac" name="fechaNac" onchange="mostrarFormularioTutor();" required><br><br>
 
         
         <div id="formularioTutor" style="display: none;">
         <h2>Datos del Tutor</h2>
 
 <!--         este el formulario de tutor que solo se muestra cuando un candidato es menor de edad -->        
-
 
 
         <label for="dniTutor">Dni:</label>
@@ -134,11 +139,30 @@ class registro{
         <label for="domicilioTutor">Domicilio del Tutor:</label>
         <input type="number" id="domicilioTutor" name="domicilioTutor"><br><br>
 
+    </div>
+
 
     </div>
+    <input type="button" value="Anterior" id="anterior" onclick="mostrarSeccion('seccion1')">
+    <input type="button" value="Siguiente" id="siguiente" onclick="mostrarSeccion('seccion2')">
     <input type="submit" value="Entrar" name="entrar">
      
     </form>
+
+    <script>
+         function mostrarSeccion(seccion) {
+        var seccion1 = document.getElementById('seccion1');
+        var seccion2 = document.getElementById('seccion2');
+
+        if (seccion === 'seccion1') {
+            seccion1.style.display = 'block';
+            seccion2.style.display = 'none';
+        } else if (seccion === 'seccion2') {
+            seccion1.style.display = 'none';
+            seccion2.style.display = 'block';
+        }
+    }
+    </script>
 
 
     </div>

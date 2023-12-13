@@ -81,36 +81,23 @@ class CandidatosRepo {
         $stmt->closeCursor();
     }
 
-   /*  // Leer un candidato por ID
+
+    // Leer un candidato por ID
     public static function leerCandidatoPorId($id) {
         $conexion = db::entrar();
 
         $sql = "SELECT * FROM candidatos WHERE id=:id";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        // Ejecutar la consulta
         $stmt->execute();
+
+        // Obtener los resultados
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        $stmt->close();
- 
+
         return $result;
-    } */
-
-    // Leer un candidato por ID
-public static function leerCandidatoPorId($id) {
-    $conexion = db::entrar();
-
-    $sql = "SELECT * FROM candidatos WHERE id=:id";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    
-    // Ejecutar la consulta
-    $stmt->execute();
-
-    // Obtener los resultados
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    return $result;
-}
+    }
 
     // Leer todos los candidatos
     public static function leerTodosLosCandidatos() {
