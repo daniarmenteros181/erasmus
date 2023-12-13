@@ -1,7 +1,7 @@
 <?php
 
-sesion::iniciaSesion();
-
+/* sesion::iniciaSesion();
+ */
 class verConvocatorias{
 
 
@@ -9,13 +9,15 @@ class verConvocatorias{
 
 
  $nombreUsuario = sesion::leerSesion('nombreUsuario');
+ mostrarMenu::mostrarMenuAlumno();
+
 
 
 
  if (funcionesLogin::estarLogeado()) {
      // El usuario está logueado, muestra el contenido protegido aquí.
-    echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
- 
+/*     echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
+ */ 
  
     sesion::guardaSesion('nombreUsuario',$_SESSION["nombreUsuario"]=$nombreUsuario);
  

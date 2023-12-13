@@ -6,7 +6,10 @@
 //Lo que tengo que hacer es dividir el formulario en tres y cada vez que le de a siguiente o anterior me lo vaya mostrando 
  class convocatoria{
 
+
     public static function comenzar(){
+        mostrarMenu::mostrarMenuAdmin();
+
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Recoger los datos del formulario
@@ -31,18 +34,14 @@
             $valorMinimoEntrevista = $_POST["valorMinimoEntrevista"]; 
 
 
-/*             $entrevista = isset($_POST["entrevista"]) ? 1 : 0;
-$notaMaximaEntrevista = isset($_POST["notaMaximaEntrevista"]) ? $_POST["notaMaximaEntrevista"] : null;
-$valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorMinimoEntrevista"] : null; */
-
-             
-
-          
-
-               
+              //Para entrevista
+              $valorNivelIdioma = isset($_POST["valorNivelIdioma"]) ? 1 : 0;
+             /*  $notaMaximaEntrevista = $_POST["notaMaximaEntrevista"];   
+              $valorMinimoEntrevista = $_POST["valorMinimoEntrevista"];  */
+            
         
             // Llamada a la función para crear un nuevo candidato
-            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario ,$requisito ,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista);
+            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario ,$requisito ,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma);
         
         }
 
@@ -59,15 +58,15 @@ $valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorM
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Dividido</title>
-        <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
-         <link rel="stylesheet" href="../js/convo.js">
+         <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
+           <link rel="stylesheet" href="../js/convo.js">
 
 
     
 </head>
 <body>
 
-<form id="miFormulario" method="post" action="">
+<form id="miFormularioConvo" method="post" action="">
 
     <div id="datos">
 
@@ -115,22 +114,28 @@ $valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorM
         </select>
 
         <input type="button" value="Siguiente" name="siguiente3" onclick="mostrarElementosBaremo()">
+
     </div>
 
 
 
 
 
+
+
+    <!-- <label for="valorNivelIdioma">Valor Nivel de Idioma:</label>
+        <input type="text" id="valorNivelIdioma" name="valorNivelIdioma"><br><br> -->
+
+        
     <div id="elementosBaremo" style="display: none;">
-        <label for="nivelIdioma">Nivel de Idioma:</label>
-        <input type="checkbox" id="nivelIdioma" name="nivelIdioma" value="nivelIdioma" onchange="mostrarCamposNivelIdioma(this)">
+        <label for="valorNivelIdioma">Nivel de Idioma:</label>
+        <input type="checkbox" id="valorNivelIdioma" name="valorNivelIdioma" value="valorNivelIdioma" onchange="mostrarCamposNivelIdioma(this)">
 
           <!-- Nuevos campos para mostrar cuando se selecciona "Nivel de Idioma" -->
     <div id="camposNivelIdioma" style="display: none;">
         
         <!-- Mostrar campos para cada nivel -->
-        <label for="valorNivelIdioma">Valor Nivel de Idioma:</label>
-        <input type="text" id="valorNivelIdioma" name="valorNivelIdioma"><br><br>
+        
 
         <label for="valorNivelIdiomaA1">Valor Nivel A1:</label>
         <input type="text" id="valorNivelIdiomaA1" name="valorNivelIdiomaA1"><br><br>
@@ -212,17 +217,6 @@ $valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorM
         <label for="requisito">Requisito:</label>
         <input type="checkbox" id="requisito" name="requisito" value="requisito" >
 
-        <!-- Nuevos campos para mostrar cuando se selecciona "Requisito" -->
-    <!-- <div id="camposRequisito" style="display: none;">
-        <label for="requisito1">Requisito 1:</label>
-        <input type="text" id="requisito1" name="requisito1"><br><br>
-
-        <label for="requisito2">Requisito 2:</label>
-        <input type="text" id="requisito2" name="requisito2"><br><br>
-
-        <label for="observacionesRequisito">Observaciones:</label>
-        <textarea id="observacionesRequisito" name="observacionesRequisito"></textarea>
-    </div> -->
 
     <input type="button" value="Anterior" name="anterior" onclick="mostrarDatos()">
     <input type="button" value="Siguiente" name="siguiente" onclick="mostrarFechas()">
@@ -253,7 +247,7 @@ $valorMinimoEntrevista = isset($_POST["valorMinimoEntrevista"]) ? $_POST["valorM
 
 
         <input type="button" value="Anterior" name="anterior" onclick="mostrarElementosBaremo()">
-        <input type="submit" value="Entrar" name="entrar">
+        <input type="submit" value="Entrar" id="entrar"name="entrar">
     </div>
 </form>
 

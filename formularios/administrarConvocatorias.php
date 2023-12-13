@@ -2,21 +2,16 @@
 
 class administrarConvocatorias{
 
+    
+
+
     public static function comienzo(){
+        mostrarMenu::mostrarMenuAdmin();
+
 
 
                 convocatoriaRepo::mostrarConvocatoriasEnTabla(); 
 
-
-              
-
-
-/*             $convocatorias = ConvocatoriaRepo::leerTodasLasConvocatorias();
- */
-        // Imprimir los resultados (puedes modificar esto según tus necesidades)
-       /*  echo "<pre>";
-        print_r($convocatorias);
-        echo "</pre>";   */
 
 
    

@@ -1,11 +1,13 @@
 <?php
 
-sesion::iniciaSesion();
-
+/* sesion::iniciaSesion();
+ */
 class usuarioRegistrado{
 
 
     public static function comenzar() {
+      mostrarMenu::mostrarMenuAlumno();
+
 
       $nombreUsuario = sesion::leerSesion('nombreUsuario');
 
@@ -13,8 +15,8 @@ class usuarioRegistrado{
 
 if (funcionesLogin::estarLogeado()) {
     // El usuario está logueado, muestra el contenido protegido aquí.
-   echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
-
+/*    echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
+ */
 
    sesion::guardaSesion('nombreUsuario',$_SESSION["nombreUsuario"]=$nombreUsuario);
 
@@ -49,10 +51,7 @@ usuarioRegistrado::comenzar();
 </head>
 <body>
 
-<nav>
-  <a href="?menu=verConvocatorias">Ver Convocatorias</a>
-  <a href="?menu=elegirConvocatoria">Crear Solicitd </a>
-</nav>
+
 
 
 </body>

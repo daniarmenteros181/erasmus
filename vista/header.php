@@ -1,7 +1,21 @@
 <?php
 
+
+
 sesion::iniciaSesion();
 if(funcionesLogin::estarLogeado()){
+    //Si se presiona el boton de out, cierra la sesion y te lleva al inicio
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    // Verifica si se presionó el botón "borrar"
+    if (isset($_POST["out"])) {
+       
+        sesion::cierraSesion();
+       header('Location: ?menu=login'); 
+       
+    
+   }
+   }
 
 ?>
     <!DOCTYPE html>
@@ -9,15 +23,13 @@ if(funcionesLogin::estarLogeado()){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--         <link rel="stylesheet" href="./estilos/estilosPrincipal.css">
- -->        <title>Document</title>
+        <link rel="stylesheet" href="./estilos/estilosPrincipal.css">
+         <title>Document</title>
     </head>
     <body>
     <header>
       
-            <div id="seg">
-                <img src="./imagenes/olalla_logo.jpg" id="ola" alt="">
-            </div>     
+                 
             <div id="primer">
                    
                     <div id="deBtn">              
@@ -34,7 +46,13 @@ if(funcionesLogin::estarLogeado()){
 
                         $nombreUsuario = sesion::leerSesion('nombreUsuario');
                         echo "¡Bienvenido, $nombreUsuario!";
+
                         ?>
+                        <form method="post" action="">
+                            <!-- Otros elementos del formulario, si es necesario -->
+                            <input type="submit" class="out" value="out" class="cierre" name="out">
+                        </form>
+
             </div>
 
             </div>   

@@ -26,7 +26,7 @@ class login{
 <head>
     <title>Inicio Sesion </title>
     <link rel="stylesheet" href="../estilos/estilosLogin.css">
-</head>
+ </head>
 <body>
 
     <div id="coge">
