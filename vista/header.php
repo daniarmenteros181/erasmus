@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <div id="cuar">
             <form method="post" action="">
-                <input type="submit" class="out" value="out" class="cierre" name="out">
+                <input type="submit" class="out" value="out" id="cierre" name="out">
             </form>
 
 
