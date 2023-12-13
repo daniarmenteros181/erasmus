@@ -7,7 +7,7 @@ body {
 header {
   background-color: #368fd3;
   color: #fff;
-  padding: 15px;
+  padding: 12px;
   display: flex;
   justify-content: space-between; /* Add justify-content property */
   align-items: center; /* Center items vertically */
@@ -64,7 +64,8 @@ header {
 }
 
 .btn:hover {
-  background-color: #2c6ea0;
+  background-color: #ddd;
+  color: black;
 }
 
 /* Estilo del footer */
@@ -72,7 +73,7 @@ footer {
   background-color: #368fd3;
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 3px;
   bottom: 0;
   position: fixed;
   width: 100%;
@@ -161,9 +162,9 @@ footer {
   padding: 12px;
 }
 
-.menu ul li.dropdown .submenu a:hover {
+/* .menu ul li.dropdown .submenu a:hover {
   background-color: #368fd3;
-}
+} */
 
 /* Foto del inicio de la aplicacion*/
 #primero{

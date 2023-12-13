@@ -2,35 +2,18 @@
 
 class administrarConvocatorias{
 
-    
-
-
     public static function comienzo(){
         mostrarMenu::mostrarMenuAdmin();
 
-
-
-                convocatoriaRepo::mostrarConvocatoriasEnTabla(); 
-
-
-
-   
+        convocatoriaRepo::mostrarConvocatoriasEnTabla(); 
 
 
     }
-
-
-
 
 }
 
 
 administrarConvocatorias::comienzo();
-
-
-
-
-
 
 
 ?>

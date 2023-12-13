@@ -10,7 +10,7 @@ class mostrarMenu{
     <html>
     <head>
         <title>Admin</title>
-        <link rel="stylesheet" href="../estilos/estilosAdmin.css">
+        <link rel="stylesheet" href="../estilos/estilosNav.css">
 
     </head>
     <body>
@@ -36,7 +36,7 @@ public static function mostrarMenuAlumno(){
 <html>
 <head>
 <title>Alumno</title>
-<link rel="stylesheet" href="../estilos/estilosAdmin.css">
+<link rel="stylesheet" href="../estilos/estilosNav.css">
 
 </head>
 <body> 
