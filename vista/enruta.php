@@ -33,11 +33,14 @@
     }if ($_GET['menu']=="elegirConvocatoria"){
         require_once './formularios/elegirConvocatoria.php';
 
+    }if ($_GET['menu']=="seleccionConvocatoria"){
+        require_once './formularios/seleccionConvocatoria.php';
+
     }
     
 }else {
     // Si no se proporciona el parámetro 'menu', carga la sección de "inicio" por defecto, que es una imagen 
-     require_once './formularios/login.php';
+     require_once './formularios/inicio.php';
 
 }
 

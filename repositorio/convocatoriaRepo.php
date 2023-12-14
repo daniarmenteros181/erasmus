@@ -262,7 +262,9 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         echo "<table border='1'>";
 
         // Encabezados de la tabla
+        
         echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
+        echo "<link rel='stylesheet' href='../estilos/crearConvocatoria.css'>";
 
         // Mostrar resultados en la tabla
         foreach ($convocatorias as $fila) {
@@ -279,7 +281,9 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
             // Botón de borrar con un formulario para evitar enlaces directos
         echo "<td>";
-            echo "<form method='post' action='../formularios/obtencion.php'>";  
+/*             echo "<form method='post' action='../formularios/seleccionConvocatoria.php'>";  
+ */          
+            echo "<form method='post' action='?menu=seleccionConvocatoria'>"; 
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
             echo "<input type='submit' value='Elegir'>";
             echo "</form>";
@@ -309,8 +313,8 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         // Si se encontró el candidato, obtenemos el ID, de lo contrario, dejamos $id como null
         if ($resultado) {
             $id = $resultado['id'];
-            echo "id de candidato: $id";
-        }
+/*             echo "id de candidato: $id";
+ */        }
     
         return $id;
     } 
