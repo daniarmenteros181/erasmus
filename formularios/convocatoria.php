@@ -70,6 +70,7 @@
 <form id="miFormularioConvo" method="post" action="">
 
     <div id="datos">
+        <h2>Creacion de convocatoria</h2>
 
         <label for="movilidades">Movilidades:</label>
         <input type="text" id="movilidades" name="movilidades"><br><br>

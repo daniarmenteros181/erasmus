@@ -1,0 +1,4 @@
+/* Para quitar la barra de la derecha*/
+body {
+    overflow-y: hidden;
+}

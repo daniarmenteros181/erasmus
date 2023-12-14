@@ -2,8 +2,8 @@
 <?php
 
 
-use Dompdf\Dompdf;
-
+/* use Dompdf\Dompdf;
+ */
 
 class seleccionConvocatoria {
 
@@ -15,20 +15,9 @@ class seleccionConvocatoria {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $idConvo = $_POST['id'];
         
-  
         
            $idCandidato = convocatoriaRepo::obtenerIdCandidato();
-        
-        
-        
-              /* // Obtener los datos del candidato por ID
-            $candidato = CandidatosRepo::leerCandidatoPorId($id);
-        
-            echo "Crear una solicitud para la convocatoria $idConvo con dni de candidato $id"; */
-        
-             // Redirigir a la clase seleccionConvocatoria con los parámetros de ID
-/*              header("Location: seleccionConvocatoria.php?idConvo=$idConvo&idCandidato=$idCandidato");
- */            
+                
     
                        
         } 
@@ -56,13 +45,21 @@ class seleccionConvocatoria {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Editar Candidato</title>
              <script src="../js/solicitud.js"></script>
-             <link rel="stylesheet" href="../estilos/crearSolicitud.css">
+              <link rel="stylesheet" href="../estilos/crearSolicitud.css">
+
 
          </head>
         <body>
 
-        <form id="candidatoForm" method="post" action="">
+        <form id="miFormularioConvo" method="post" action="">
+            
+
+            
         <h2>Editar Candidato</h2>
+
+
+        <div class="form-column" id="firstColumn">
+
         <label for="dni">DNI:</label>
         <input type="text" id="dni" name="dni"><br>
 
@@ -77,6 +74,12 @@ class seleccionConvocatoria {
 
         <label for="tlf">Teléfono:</label>
         <input type="text" id="tlf" name="tlf"><br>
+
+     
+
+        </div>
+
+        <div class="form-column" id="segundo">
 
         <label for="correo">Correo:</label>
         <input type="email" id="correo" name="correo"><br>
@@ -99,12 +102,11 @@ class seleccionConvocatoria {
         <input type="hidden" id="idConvo" name="idConvo" value="<?php echo $idConvo; ?>">
 
 
-
+        </div>
         <input type="submit" name="Actualizar" value="Crear">
         <input type="submit" name="descargarPDF" value="Descargar PDF">
 
         <br>
-        
     </form>
 
     </body>

@@ -1,46 +1,67 @@
-#candidatoForm {
-    width: 300px;
+#miFormularioConvo {
+    max-width: 700px;
     margin: 20px auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#candidatoForm label {
+#miFormularioConvo label {
     display: block;
-    margin: 10px 0 5px;
-    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-#candidatoForm input[type="text"],
-#candidatoForm input[type="date"],
-#candidatoForm input[type="email"],
-#candidatoForm input[type="password"] {
-    width: 100%;
+#miFormularioConvo .form-column {
+    width: 48%; 
+    box-sizing: border-box;
+    float: left;
+}
+
+#miFormularioConvo #segundo {
+    float: right;
+}
+
+#miFormularioConvo input,
+#miFormularioConvo select{
+    width: calc(100% - 16px);
     padding: 8px;
-    margin: 5px 0 10px;
+    margin-bottom: 16px;
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
 
-#candidatoForm input[type="submit"] {
+#miFormularioConvo select {
+    appearance: none;
+}
+
+#miFormularioConvo input[type="checkbox"] {
+    margin-top: 6px;
+}
+
+#miFormularioConvo input[type="button"],
+#miFormularioConvo input[type="submit"] {
     background-color: #4caf50;
-    color: white;
-    padding: 10px 15px;
+    color: #fff;
+    padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
 
-#candidatoForm input[type="submit"]:hover {
+#miFormularioConvo input[type="button"]:hover,
+#miFormularioConvo input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-#candidatoForm .error {
-    color: #ff0000;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
+
+
+
+/* Limpiar el float para evitar problemas de diseño */
+/* #miFormularioConvo:after {
+    content: "";
+    display: table;
+    clear: both;
 }
+ */

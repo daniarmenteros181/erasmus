@@ -40,12 +40,14 @@ usuarioRegistrado::comenzar();
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Menú de Convocatorias</title>
-  <link rel="stylesheet" href="../estilos/estilosAdmin.css">
-
+   <link rel="stylesheet" href="../estilos/user.css">
+ 
 </head>
 <body>
+<!--   <img src="./imagenes/erasmus.jpg" alt="">
+ -->
 
-
+  <img id="primero" src="../imagenes/bien.jpg" alt="">
 
 
 </body>

@@ -1,9 +1,7 @@
 <?php
 
-/* sesion::iniciaSesion();
- */
-class verConvocatorias{
 
+class verConvocatorias{
 
     public static function comenzar() {
 
@@ -14,36 +12,26 @@ class verConvocatorias{
 
 
 
- if (funcionesLogin::estarLogeado()) {
-     // El usuario está logueado, muestra el contenido protegido aquí.
-/*     echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
- */ 
- 
+ if (funcionesLogin::estarLogeado()) { 
     sesion::guardaSesion('nombreUsuario',$_SESSION["nombreUsuario"]=$nombreUsuario);
  
- 
+
  
  } else {
-     // El usuario no está logueado, redirige a la página de inicio de recuperar contraseña.
      echo("mal");
  }
 
 
-
+//Funcion para obtener el id del candidato logueado
  $id = convocatoriaRepo::obtenerIdCandidato();
- $convocatorias = convocatoriaRepo::obtenerConvocatoriasDichas($id);
-
-
-
-
+ //Funcion que pinta la tabla de las Solicitudes que ha presentado un candidato
+ $convocatorias = convocatoriaRepo::tablaSolicitudes($id);
 
 }
 }
-
 
 
 verConvocatorias::comenzar();
-
 
 
 ?>

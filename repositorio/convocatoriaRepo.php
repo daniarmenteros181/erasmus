@@ -188,14 +188,20 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
 
      // Actualizar una convocatoria existente por ID
-     public static function actualizarConvocatoria($id, $movilidades, $tipo, $fechaInicio) {
+     public static function actualizarConvocatoria($id, $movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba ,$fechaInicioDefinitiva) {
         $conexion = db::entrar();
 
-        $sql = "UPDATE convocatoria SET movilidades=:movilidades, tipo=:tipo, fechaInicio=:fechaInicio WHERE id=:id";
+        $sql = "UPDATE convocatoria SET movilidades=:movilidades, tipo=:tipo, fechaInicio=:fechaInicio, fechaFin=:fechaFin, fechaInicioPrueba=:fechaInicioPrueba, fechaFinPrueba=:fechaFinPrueba , fechaInicioDefinitiva=:fechaInicioDefinitiva WHERE id=:id";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':movilidades', $movilidades);
         $stmt->bindParam(':tipo', $tipo);
         $stmt->bindParam(':fechaInicio', $fechaInicio);
+        $stmt->bindParam(':fechaFin', $fechaFin);
+        $stmt->bindParam(':fechaInicioPrueba', $fechaInicioPrueba);
+        $stmt->bindParam(':fechaFinPrueba', $fechaFinPrueba);
+        $stmt->bindParam(':fechaInicioDefinitiva', $fechaInicioDefinitiva);
+
+
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         $stmt->closeCursor();
@@ -295,8 +301,11 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
         // Comenzar la tabla
         echo "<table border='1'>";
-        echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
+        echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th><th></th></tr>";
         echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+
+        echo "<h2>Convocatorias disponibles</h2>";
+
 
         // Mostrar resultados en la tabla
         foreach ($convocatorias as $fila) {
@@ -315,7 +324,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
             echo "<td>";          
             echo "<form method='post' action='?menu=seleccionConvocatoria'>"; 
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
-            echo "<input type='submit' value='Elegir'>";
+            echo "<input type='submit' id='boton' value='Elegir'>";
             echo "</form>";
             echo "</td>";
 
@@ -430,8 +439,8 @@ public static function obtenerInfoItemBaremo($nombreItem) {
     } 
 
 
-    //Funcion que obtinene las convocatorias de un cierto candidatos y las pinta
-    public static function obtenerConvocatoriasDichas($id) {
+    //Funcion que obtinene las convocatorias de un cierto candidatos y pinta la tabla 
+    public static function tablaSolicitudes($id) {
         $conexion = db::entrar();
     
         $sql = "SELECT convocatoria.*
@@ -446,11 +455,13 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         $convocatorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $stmt->closeCursor();
 
-        // Muestra las convocatorias en una tabla
+        // Muestra las convocatorias de un candidato  en una tabla
         echo "<table border='1'>";
         echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
 
         echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+        echo "<h2>Todas las Solicitudes</h2>";
+
 
 
         foreach ($convocatorias as $fila) {
@@ -482,10 +493,10 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         echo "<table border='1'>";
 
         // Encabezados de la tabla
-        echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
+        echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th><th></th><th></th></tr>";
         echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
 
-        echo "    <h2>Todas las Convocatorias</h2>";
+        echo "<h2>Todas las Convocatorias</h2>";
 
         // Mostrar resultados en la tabla
         foreach ($convocatorias as $fila) {
@@ -509,7 +520,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         echo "</td>";
 
         echo "<td>";
-            echo "<form method='post' action='../formularios/actualiarConvocatoriaClass.php'>";  
+            echo "<form method='post' action='?menu=edicionConvo'>";  
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
             echo "<input type='submit' value='Actualizar'>";
             echo "</form>";
