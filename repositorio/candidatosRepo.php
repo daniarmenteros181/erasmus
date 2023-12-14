@@ -62,7 +62,7 @@ class CandidatosRepo {
         $stmt->bindParam(':tlf', $tlf);
         $stmt->bindParam(':correo', $correo);
         $stmt->bindParam(':domicilio', $domicilio);
-       $stmt->bindParam(':fk_destinatario', $fk_destinatario, PDO::PARAM_INT);
+       $stmt->bindParam(':fk_destinatario', $fk_destinatario, PDO::PARAM_STR);
         $stmt->bindParam(':contrasenia', $contrasenia);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->bindParam(':rol', $rol);

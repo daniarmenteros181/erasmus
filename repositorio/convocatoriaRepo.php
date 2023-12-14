@@ -241,7 +241,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
     
      
-
+/* 
     public static function leerConvocatoriasPorDestinatario($id_destinatario) {
         $conexion = db::entrar();
     
@@ -257,10 +257,34 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         return $convocatorias;
     
         
-    } 
+    }  */
    
     
     
+
+    public static function leerConvocatoriasPorDestinatario($id_destinatario) {
+        $conexion = db::entrar();
+    
+        $sql = "SELECT c.*
+        FROM convocatoria c
+        INNER JOIN destinatarioconvocatoria dc ON c.id = dc.id_convocatoria
+        WHERE dc.id_destinatario = :id_destinatario";
+
+
+    try {
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':id_destinatario', $id_destinatario, PDO::PARAM_STR);
+        $stmt->execute();
+        $convocatorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $convocatorias;
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        return [];
+    } finally {
+        $conexion = null;
+    }
+
+    } 
 
 
 
