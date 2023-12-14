@@ -43,7 +43,7 @@ public static function mostrarMenuAlumno(){
     <form id="miFormulario" method="post" action="">
         
         <nav>
-        <a href="?menu=verConvocatorias">Ver Convocatorias</a>
+        <a href="?menu=verConvocatorias">Ver Solicitudes</a>
         <a href="?menu=elegirConvocatoria">Crear Solicitd </a>
         </nav>
     </form>

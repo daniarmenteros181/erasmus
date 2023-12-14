@@ -10,9 +10,6 @@ class convocatoriaRepo {
     try {
         $conexion->beginTransaction();
 
-        
-
-
 
         // Insertar en la tabla convocatoria
         $sql = "INSERT INTO convocatoria (movilidades, tipo, fechaInicio, fechaFin, fechaInicioPrueba, fechaFinPrueba, fechaInicioDefinitiva, fk_proyecto) VALUES (:movilidades, :tipo, :fechaInicio, :fechaFin, :fechaInicioPrueba, :fechaFinPrueba, :fechaInicioDefinitiva, :fk_proyecto)";
@@ -123,8 +120,6 @@ class convocatoriaRepo {
             $stmtConvoBaremoIdioma->execute();
         }
 } 
-    
-
         // Confirmar la transacción
         $conexion->commit();
     } catch (Exception $e) {
@@ -135,6 +130,11 @@ class convocatoriaRepo {
         $stmt->closeCursor();
     }
 }
+
+
+
+
+
 
 public static function obtenerIdNivelIdiomaDesdeTabla($nivel)
 {
@@ -166,6 +166,7 @@ public static function obtenerIdNivelIdiomaDesdeTabla($nivel)
 
 
 
+
 public static function obtenerInfoItemBaremo($nombreItem) {
     // Conéctate a la base de datos (ajusta según tu configuración)
     $conexion = db::entrar();
@@ -184,24 +185,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 }
 
 
-    /*  // Actualizar una convocatoria existente por ID
-    public static function actualizarConvocatoria($id, $movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto) {
-        $conexion = db::entrar();
 
-        $sql = "UPDATE convocatoria SET movilidades=:movilidades, tipo=:tipo, fechaInicio=:fechaInicio, fechaFin=:fechaFin, fechaInicioPrueba=:fechaInicioPrueba, fechaFinPrueba=:fechaFinPrueba, fechaInicioDefinitiva=:fechaInicioDefinitiva, fk_proyecto=:fk_proyecto WHERE id=:id";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindParam(':movilidades', $movilidades);
-        $stmt->bindParam(':tipo', $tipo);
-        $stmt->bindParam(':fechaInicio', $fechaInicio);
-        $stmt->bindParam(':fechaFin', $fechaFin);
-        $stmt->bindParam(':fechaInicioPrueba', $fechaInicioPrueba);
-        $stmt->bindParam(':fechaFinPrueba', $fechaFinPrueba);
-        $stmt->bindParam(':fechaInicioDefinitiva', $fechaInicioDefinitiva);
-        $stmt->bindParam(':fk_proyecto', $fk_proyecto, PDO::PARAM_INT);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $stmt->closeCursor();
-    }  */
 
      // Actualizar una convocatoria existente por ID
      public static function actualizarConvocatoria($id, $movilidades, $tipo, $fechaInicio) {
@@ -218,7 +202,6 @@ public static function obtenerInfoItemBaremo($nombreItem) {
     }
 
     
-
 
      public static function borrarConvocatoria($id) {
         $conexion = db::entrar();
@@ -255,16 +238,17 @@ public static function obtenerInfoItemBaremo($nombreItem) {
     } 
 
     //Funcion que llama al metodo que trae las convocatorias, y la muestra en una tabla 
-    public static  function mostrarConvocatoriasEnTablaSolo() {
+    public static  function mostrarTodasConvocatoriasEnTabla() {
         $convocatorias = self::leerTodasLasConvocatorias();
 
         // Comenzar la tabla
         echo "<table border='1'>";
 
+
         // Encabezados de la tabla
-        
         echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
-        echo "<link rel='stylesheet' href='../estilos/crearConvocatoria.css'>";
+        echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+
 
         // Mostrar resultados en la tabla
         foreach ($convocatorias as $fila) {
@@ -280,9 +264,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
             echo "<td>" . $fila['fk_proyecto'] . "</td>";
 
             // Botón de borrar con un formulario para evitar enlaces directos
-        echo "<td>";
-/*             echo "<form method='post' action='../formularios/seleccionConvocatoria.php'>";  
- */          
+        echo "<td>";          
             echo "<form method='post' action='?menu=seleccionConvocatoria'>"; 
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
             echo "<input type='submit' value='Elegir'>";
@@ -313,8 +295,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         // Si se encontró el candidato, obtenemos el ID, de lo contrario, dejamos $id como null
         if ($resultado) {
             $id = $resultado['id'];
-/*             echo "id de candidato: $id";
- */        }
+       }
     
         return $id;
     } 
@@ -340,6 +321,9 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         echo "<table border='1'>";
         echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
 
+        echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+
+
         foreach ($convocatorias as $fila) {
             echo "<tr>";
             echo "<td>" . $fila['id'] . "</td>";
@@ -351,7 +335,6 @@ public static function obtenerInfoItemBaremo($nombreItem) {
             echo "<td>" . $fila['fechaFinPrueba'] . "</td>";
             echo "<td>" . $fila['fechaInicioDefinitiva'] . "</td>";
             echo "<td>" . $fila['fk_proyecto'] . "</td>";
-            // ... Muestra otras columnas
             echo "</tr>";
         }
 
@@ -361,14 +344,19 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
 
     //Funcion que llama al metodo que trae las convocatorias, y la muestra en una tabla 
-    public static  function mostrarConvocatoriasEnTabla() {
+    public static  function mostrarConvocatoriasCrud() {
         $convocatorias = self::leerTodasLasConvocatorias();
+
+    
 
         // Comenzar la tabla
         echo "<table border='1'>";
 
         // Encabezados de la tabla
         echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
+        echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+
+        echo "    <h2>Todas las Convocatorias</h2>";
 
         // Mostrar resultados en la tabla
         foreach ($convocatorias as $fila) {
@@ -385,7 +373,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
             // Botón de borrar con un formulario para evitar enlaces directos
         echo "<td>";
-            echo "<form method='post' action='../formularios/borrarConvocatoriaClass.php'>";  
+            echo "<form method='post' action='?menu=eliminacion'>";  
             echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
             echo "<input type='submit' value='Borrar'>";
             echo "</form>";

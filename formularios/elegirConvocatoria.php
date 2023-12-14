@@ -9,7 +9,7 @@ class elegirConvocatoria{
 
 
 
- convocatoriaRepo::mostrarConvocatoriasEnTablaSolo();
+ convocatoriaRepo::mostrarTodasConvocatoriasEnTabla();
 
 
 }

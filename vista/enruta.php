@@ -37,6 +37,10 @@
         require_once './formularios/seleccionConvocatoria.php';
 
     }
+    if ($_GET['menu']=="eliminacion"){
+        require_once './formularios/borrarConvocatoriaClass.php';
+
+    }
     
 }else {
     // Si no se proporciona el parámetro 'menu', carga la sección de "inicio" por defecto, que es una imagen 

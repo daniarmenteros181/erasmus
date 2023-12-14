@@ -59,6 +59,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario Dividido</title>
          <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
+
            <link rel="stylesheet" href="../js/convo.js">
 
 
