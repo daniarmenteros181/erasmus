@@ -1,7 +1,5 @@
 <?php
 
-/* sesion::iniciaSesion();
- */
 class usuarioRegistrado{
 
 
@@ -12,14 +10,10 @@ class usuarioRegistrado{
       $nombreUsuario = sesion::leerSesion('nombreUsuario');
 
 
-
 if (funcionesLogin::estarLogeado()) {
     // El usuario está logueado, muestra el contenido protegido aquí.
-/*    echo "¡Bienvenido  $nombreUsuario  , esto es administrar examenes ";
- */
 
    sesion::guardaSesion('nombreUsuario',$_SESSION["nombreUsuario"]=$nombreUsuario);
-
 
 
 } else {

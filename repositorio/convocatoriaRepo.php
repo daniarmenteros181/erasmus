@@ -237,7 +237,73 @@ public static function obtenerInfoItemBaremo($nombreItem) {
         return $convocatorias  ;
     } 
 
-    //Funcion que llama al metodo que trae las convocatorias, y la muestra en una tabla 
+     
+
+    
+     
+
+    public static function leerConvocatoriasPorDestinatario($id_destinatario) {
+        $conexion = db::entrar();
+    
+       
+        $sql = "SELECT c.*
+            FROM convocatoria c
+            INNER JOIN destinatarioconvocatoria dc ON c.id = dc.id_convocatoria
+            WHERE dc.id_destinatario = :id_destinatario";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':id_destinatario', $id_destinatario, PDO::PARAM_STR);
+        $stmt->execute();
+        $convocatorias = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $convocatorias;
+    
+        
+    } 
+   
+    
+    
+
+
+
+
+    // Función que muestra todas las convocatorias en una tabla
+    public static function mostrarConvocatoriasPorDestinatarioEnTabla($id_destinatario) {
+        $convocatorias = self::leerConvocatoriasPorDestinatario($id_destinatario);
+
+        // Comenzar la tabla
+        echo "<table border='1'>";
+        echo "<tr><th>ID</th><th>Movilidades</th><th>Tipo</th><th>Fecha Inicio</th><th>Fecha Fin</th><th>Fecha Inicio Prueba</th><th>Fecha Fin Prueba</th><th>Fecha Inicio Definitiva</th><th>FK Proyecto</th></tr>";
+        echo " <link rel='stylesheet' href='../estilos/estilosTablas.css'>";
+
+        // Mostrar resultados en la tabla
+        foreach ($convocatorias as $fila) {
+            echo "<tr>";
+            echo "<td>" . $fila['id'] . "</td>";
+            echo "<td>" . $fila['movilidades'] . "</td>";
+            echo "<td>" . $fila['tipo'] . "</td>";
+            echo "<td>" . $fila['fechaInicio'] . "</td>";
+            echo "<td>" . $fila['fechaFin'] . "</td>";
+            echo "<td>" . $fila['fechaInicioPrueba'] . "</td>";
+            echo "<td>" . $fila['fechaFinPrueba'] . "</td>";
+            echo "<td>" . $fila['fechaInicioDefinitiva'] . "</td>";
+            echo "<td>" . $fila['fk_proyecto'] . "</td>";
+
+            // Botón de elegir con un formulario para evitar enlaces directos
+            echo "<td>";          
+            echo "<form method='post' action='?menu=seleccionConvocatoria'>"; 
+            echo "<input type='hidden' name='id' value='" . $fila['id'] . "'>";
+            echo "<input type='submit' value='Elegir'>";
+            echo "</form>";
+            echo "</td>";
+
+            echo "</tr>";
+        }
+
+        // Finalizar la tabla
+        echo "</table>";
+    }
+
+
+   /*  //Funcion que llama al metodo que trae las convocatorias, y la muestra en una tabla 
     public static  function mostrarTodasConvocatoriasEnTabla() {
         $convocatorias = self::leerTodasLasConvocatorias();
 
@@ -278,7 +344,7 @@ public static function obtenerInfoItemBaremo($nombreItem) {
 
         // Finalizar la tabla
         echo "</table>";
-    }
+    } */
 
     
      public static function obtenerIdCandidato() {
@@ -286,6 +352,45 @@ public static function obtenerInfoItemBaremo($nombreItem) {
     
         // Lógica para obtener el ID del destinatario desde la base de datos
         $sql = "SELECT id FROM candidatos WHERE nombre = :nombreUsuario";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':nombreUsuario', $_SESSION['nombreUsuario']);
+    
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Si se encontró el candidato, obtenemos el ID, de lo contrario, dejamos $id como null
+        if ($resultado) {
+            $id = $resultado['id'];
+       }
+    
+        return $id;
+    } 
+
+    public static function obtenerCodGrupo() {
+        $conexion = db::entrar();
+    
+        // Lógica para obtener el cod_grupo desde la base de datos
+        $sql = "SELECT fk_destinatario FROM candidatos WHERE nombre = :nombreUsuario";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':nombreUsuario', $_SESSION['nombreUsuario']);
+    
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        // Si se encontró el candidato, obtenemos el cod_grupo
+        // de lo contrario, dejamos $cod_grupo como null
+        $cod_grupo = ($resultado) ? $resultado['fk_destinatario'] : null;
+    
+        return $cod_grupo;
+    }
+    
+    
+
+    public static function obtenerCursoCandidato() {
+        $conexion = db::entrar();
+    
+        // Lógica para obtener el ID del destinatario desde la base de datos
+        $sql = "SELECT fk_destinatario FROM candidatos WHERE nombre = :nombreUsuario";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(':nombreUsuario', $_SESSION['nombreUsuario']);
     

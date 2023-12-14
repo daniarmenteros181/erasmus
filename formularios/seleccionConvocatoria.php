@@ -1,22 +1,10 @@
 
 <?php
 
-//Tabla con los baremos de esa conbocatoria 
-
-/* require_once '../repositorio/db.php'; 
-require_once '../helpers/sesion.php'; 
-require_once './mostrarMenu.php'; 
-require_once '../repositorio/convocatoriaRepo.php'; 
-require_once '../repositorio/candidatosConvocatoriaRepo.php'; 
-require_once '../repositorio/candidatosRepo.php';  */
-
-
 
 use Dompdf\Dompdf;
 
 
-/* sesion::iniciaSesion();
- */
 class seleccionConvocatoria {
 
 
@@ -27,8 +15,7 @@ class seleccionConvocatoria {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
             $idConvo = $_POST['id'];
         
-            // Obtener datos existentes de la convocatoria
-        /*     echo("convocatoria:  ,$idConvo");*/
+  
         
            $idCandidato = convocatoriaRepo::obtenerIdCandidato();
         
