@@ -44,10 +44,9 @@ usuarioRegistrado::comenzar();
  
 </head>
 <body>
-<!--   <img src="./imagenes/erasmus.jpg" alt="">
- -->
 
-  <img id="primero" src="../imagenes/bien.jpg" alt="">
+
+  <img id="primero" src="../imagenes/logue.png" alt="">
 
 
 </body>

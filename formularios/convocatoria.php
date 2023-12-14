@@ -70,7 +70,7 @@
 <form id="miFormularioConvo" method="post" action="">
 
     <div id="datos">
-        <h2>Creacion de convocatoria</h2>
+        <h1>Creacion de convocatoria</h1>
 
         <label for="movilidades">Movilidades:</label>
         <input type="text" id="movilidades" name="movilidades"><br><br>
@@ -159,23 +159,6 @@
     </div>
      
 
-        <!-- <label for="entrevista">Entrevista:</label>
-        <input type="checkbox" id="entrevista" name="entrevista" value="entrevista"onchange="mostrarCamposEntrevista(this)">
-
-          Nuevos campos para mostrar cuando se selecciona "Entrevista"
-          <div id="camposEntrevista" style="display: none;">
-            <label for="notaMaxima">Nota Máxima:</label>
-            <input type="text" id="notaMaxima" name="notaMaxima"><br><br>
-
-            <label for="valorMinimo">Valor Mínimo:</label>
-            <input type="text" id="valorMinimo" name="valorMinimo"><br><br>
-
-            <label for="aporteAlumno">Aporte Alumno:</label>
-            <input type="checkbox" id="aporteAlumno" name="aporteAlumno" value="aporteAlumno">
-
-            <label for="ficheroIdoneidad">Fichero de Idoneidad:</label>
-            <input type="checkbox" id="ficheroIdoneidad" name="ficheroIdoneidad" value="ficheroIdoneidad">
-        </div>  -->
 
 
         <label for="entrevista">Entrevista:</label>

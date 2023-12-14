@@ -8,10 +8,9 @@
     <title>Document</title>
 </head>
 <body>
-<img id="primero" src="../imagenes/erasmus.jpg" alt="">
+<img id="primero" src="../imagenes/bien.jpg" alt="">
 
-<!-- <input type="button" value="Siguiente" name="siguiente3" >
- -->
+
     
 </body>
 </html>

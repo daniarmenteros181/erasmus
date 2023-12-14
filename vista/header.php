@@ -80,9 +80,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </head>
     <body>
     <header>
-       <div id="seg">
-                <img src="./imagenes/olalla_logo.jpg" id="ola" alt="">
-            </div>
+       
 
             <div id="primer">
                    

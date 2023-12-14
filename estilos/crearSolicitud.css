@@ -1,4 +1,4 @@
-#miFormularioConvo {
+#candidatoForm {
     max-width: 700px;
     margin: 20px auto;
     padding: 20px;
@@ -7,23 +7,23 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-#miFormularioConvo label {
+#candidatoForm label {
     display: block;
     margin-bottom: 8px;
 }
 
-#miFormularioConvo .form-column {
+#candidatoForm .form-column {
     width: 48%; 
     box-sizing: border-box;
     float: left;
 }
 
-#miFormularioConvo #segundo {
+#candidatoForm #segundo {
     float: right;
 }
 
-#miFormularioConvo input,
-#miFormularioConvo select{
+#candidatoForm input,
+#candidatoForm select{
     width: calc(100% - 16px);
     padding: 8px;
     margin-bottom: 16px;
@@ -32,16 +32,16 @@
     border-radius: 4px;
 }
 
-#miFormularioConvo select {
+#candidatoForm select {
     appearance: none;
 }
 
-#miFormularioConvo input[type="checkbox"] {
+#candidatoForm input[type="checkbox"] {
     margin-top: 6px;
 }
 
-#miFormularioConvo input[type="button"],
-#miFormularioConvo input[type="submit"] {
+#candidatoForm input[type="button"],
+#candidatoForm input[type="submit"] {
     background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
@@ -50,8 +50,8 @@
     cursor: pointer;
 }
 
-#miFormularioConvo input[type="button"]:hover,
-#miFormularioConvo input[type="submit"]:hover {
+#candidatoForm input[type="button"]:hover,
+#candidatoForm input[type="submit"]:hover {
     background-color: #45a049;
 }
 

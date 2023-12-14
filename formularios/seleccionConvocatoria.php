@@ -51,7 +51,7 @@ class seleccionConvocatoria {
          </head>
         <body>
 
-        <form id="miFormularioConvo" method="post" action="">
+        <form id="candidatoForm" method="post" action="">
             
 
             
