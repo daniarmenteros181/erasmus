@@ -1,14 +1,14 @@
 <?php
 class Convocatoria {
-    private $id;
-    private $movilidades;
-    private $tipo;
-    private $fechaInicio;
-    private $fechaFin;
-    private $fechaInicioPrueba;
-    private $fechaFinPrueba;
-    private $fechaInicioDefinitiva;
-    private $fkProyecto;
+    public $id;
+    public $movilidades;
+    public $tipo;
+    public $fechaInicio;
+    public $fechaFin;
+    public $fechaInicioPrueba;
+    public $fechaFinPrueba;
+    public $fechaInicioDefinitiva;
+    public $fkProyecto;
 
     public function __construct($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fkProyecto) {
         $this->movilidades = $movilidades;

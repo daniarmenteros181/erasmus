@@ -1,12 +1,12 @@
 <?php
 class ConvocatoriaBaremo {
-    private $id;
-    private $requisito;
-    private $notaMaxima;
-    private $fkConvocatoria;
-    private $fkItemBaremo;
-    private $valorMinimo;
-    private $aportaAlumno; 
+    public $id;
+    public $requisito;
+    public $notaMaxima;
+    public $fkConvocatoria;
+    public $fkItemBaremo;
+    public $valorMinimo;
+    public $aportaAlumno; 
 
 
     public function __construct($requisito, $notaMaxima, $fkConvocatoria, $fkItemBaremo, $valorMinimo, $aportaAlumno) {

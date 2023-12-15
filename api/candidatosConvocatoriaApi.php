@@ -21,6 +21,9 @@ try {
         // Llamar a la función para insertar candidato en la convocatoria
         candidatosConvocatoriaRepo::insertarCandidatoConvocatoria($datos_post->id_candidatos, $datos_post->id_convocatoria);
 
+/*         $idBaremacion = candidatosConvocatoriaRepo::insertarCandidatoConvocatoria($datos_post['id_candidatos'], $datos_post['id_convocatoria']);
+ */
+
         // Enviar respuesta de éxito
         header('Content-type: application/json');
         echo json_encode(['mensaje' => 'Candidato insertado en la convocatoria correctamente']);

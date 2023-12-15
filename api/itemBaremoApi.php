@@ -1,34 +1,30 @@
 <?php
 
+require_once('../repositorio/db.php');
+require_once('../repositorio/itemBaremoRepo.php');
 
-require_once('../repositorio/db.php'); // Asegúrate de proporcionar la ruta correcta
-require_once('../repositorio/tutorRepo.php'); // Asegúrate de proporcionar la ruta correcta
+header('Content-Type: application/json');
 
-
-if ($_SERVER['REQUEST_METHOD']=='GET')	{
-try {
-    // Obtener la conexión a la base de datos utilizando la clase db
-    $conexion = db::entrar();
-
-    
-    $tutor = TutorRepo::leerTodosLosTutores();
-
-
-
- 
-    // Verificar si se encontraron tutores
-    if ($tutor) {
-        // Convertir a JSON y enviar la respuesta
-        header('Content-type: application/json');
-        echo json_encode(['tutor' => $tutor]);
-    } else {
-        // Si no se encuentran categorías, puedes manejarlo según tus necesidades
-        header('HTTP/1.0 404 Not Found');
-        echo json_encode(array('error' => 'No se encontraron categorías'));
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    // Obtener ítems del baremo por ID de convocatoria
+    if (!empty($_GET['idConvocatoriaBaremo'])) {
+        $idConvocatoriaBaremo = intval($_GET['idConvocatoriaBaremo']);
+        $itemsBaremo = ItemBaremoRepo::obtenerItemsPorConvocatoriaBaremo($idConvocatoriaBaremo);
+        echo json_encode(['itemsBaremo' => $itemsBaremo]);
     }
-} catch (PDOException $e) {
-    // Manejar errores de la base de datos según tus necesidades
-    header('HTTP/1.1 500 Internal Server Error');
-    echo json_encode(array('error' => 'Error en la base de datos: ' . $e->getMessage()));
-}
+    // Obtener ítem del baremo por ID
+    elseif (!empty($_GET['id'])) {
+        $id = intval($_GET['id']);
+        $itemBaremo = ItemBaremoRepo::obtenerItemPorId($id);
+        echo json_encode(['itemBaremo' => $itemBaremo]);
+    }
+    // Obtener todos los ítems del baremo
+    else {
+        $todosLosItems = ItemBaremoRepo::obtenerTodosLosItems();
+        echo json_encode(['todosLosItems' => $todosLosItems]);
+    }
+} else {
+    // Método no permitido
+    header('HTTP/1.0 405 Method Not Allowed');
+    echo json_encode(['error' => 'Método no permitido']);
 }

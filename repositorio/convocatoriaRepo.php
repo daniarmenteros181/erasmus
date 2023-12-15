@@ -4,7 +4,7 @@
 class convocatoriaRepo {
 
 
- public static function crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario,$requisito,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma) {
+ /* public static function crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario,$requisito,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma) {
     $conexion = db::entrar();
 
     try {
@@ -130,6 +130,148 @@ class convocatoriaRepo {
         $stmt->closeCursor();
     }
 }
+ */
+
+ public static function crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario,$requisito,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma,$aporteAlumnoIdioma,$aporteAlumnoNotas,$aporteAlumnoEntrevista) {
+    $conexion = db::entrar();
+
+    try {
+        $conexion->beginTransaction();
+
+
+        // Insertar en la tabla convocatoria
+        $sql = "INSERT INTO convocatoria (movilidades, tipo, fechaInicio, fechaFin, fechaInicioPrueba, fechaFinPrueba, fechaInicioDefinitiva, fk_proyecto) VALUES (:movilidades, :tipo, :fechaInicio, :fechaFin, :fechaInicioPrueba, :fechaFinPrueba, :fechaInicioDefinitiva, :fk_proyecto)";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':movilidades', $movilidades);
+        $stmt->bindParam(':tipo', $tipo);
+        $stmt->bindParam(':fechaInicio', $fechaInicio);
+        $stmt->bindParam(':fechaFin', $fechaFin);
+        $stmt->bindParam(':fechaInicioPrueba', $fechaInicioPrueba);
+        $stmt->bindParam(':fechaFinPrueba', $fechaFinPrueba);
+        $stmt->bindParam(':fechaInicioDefinitiva', $fechaInicioDefinitiva);
+        $stmt->bindParam(':fk_proyecto', $fk_proyecto);
+
+
+        $stmt->execute();
+
+        //  Obtener la última ID insertada
+        $idConvocatoria = $conexion->lastInsertId();
+
+        // Insertar en la tabla destinatarioconvocatoria
+        $sqlDestinatario = "INSERT INTO destinatarioconvocatoria (id_convocatoria, id_destinatario) VALUES (:id_convocatoria, :id_destinatario)";
+        $stmtDestinatario = $conexion->prepare($sqlDestinatario);
+        
+      
+        $stmtDestinatario->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmtDestinatario->bindParam(':id_destinatario', $id_destinatario);
+        
+        $stmtDestinatario->execute();
+
+
+    // Insertar en la tabla convocatoriabaremo para Requisito
+    if ($requisito) {
+        $infoRequisito = self::obtenerInfoItemBaremo("Requisito");
+        $sqlConvoBaremoRequisito = "INSERT INTO convocatoriabaremo (id_convocatoria, requisito, fk_item_baremo) VALUES (:id_convocatoria, :requisito, :fk_item_requisito)";
+        $stmtConvoBaremoRequisito = $conexion->prepare($sqlConvoBaremoRequisito);
+        $stmtConvoBaremoRequisito->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmtConvoBaremoRequisito->bindParam(':requisito', $requisito);
+        $stmtConvoBaremoRequisito->bindParam(':fk_item_requisito', $infoRequisito['id'], PDO::PARAM_INT);
+
+        $stmtConvoBaremoRequisito->execute();
+    }
+
+    
+
+
+
+    if ($valorNivelIdioma) {
+        // Realizar operaciones específicas cuando $valorNivelIdioma es verdadero
+        $infoNivelIdioma = self::obtenerInfoItemBaremo("Nivelidioma");
+        $sqlConvoBaremoNivelIdioma = "INSERT INTO convocatoriabaremo (id_convocatoria, fk_item_baremo,aportaAlumno) VALUES (:id_convocatoria, :fk_item_nivel_idioma, :aporteAlumnoIdioma)";
+        $stmtConvoBaremoNivelIdioma = $conexion->prepare($sqlConvoBaremoNivelIdioma);
+        $stmtConvoBaremoNivelIdioma->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmtConvoBaremoNivelIdioma->bindParam(':fk_item_nivel_idioma', $infoNivelIdioma['id'], PDO::PARAM_INT);
+        $stmtConvoBaremoNivelIdioma->bindParam(':aporteAlumnoIdioma', $aporteAlumnoIdioma, PDO::PARAM_INT);
+
+     
+        $stmtConvoBaremoNivelIdioma->execute();
+   
+
+
+
+        // Insertar en la tabla convocatoriabaremoIdioma
+        // Obtener el último ID insertado en la tabla convocatoriabaremo
+        $fk_convocatoria_Baremo = $conexion->lastInsertId();
+        $sqlConvoBaremoIdioma = "INSERT INTO convocatoriabaremoidioma (fk_niveles_idiomas, fk_convocatoria_Baremo,valor) VALUES (:fk_niveles_idiomas, :fk_convocatoria_Baremo,:valor)";
+        $stmtConvoBaremoIdioma = $conexion->prepare($sqlConvoBaremoIdioma);
+
+
+        // Asignar valor para cada nivel de idioma
+        $nivelesIdioma = [
+            "A1" => $_POST["valorNivelIdiomaA1"],
+            "A2" => $_POST["valorNivelIdiomaA2"],
+            "B1" => $_POST["valorNivelIdiomaB1"],
+            "B2" => $_POST["valorNivelIdiomaB2"],
+            "C1" => $_POST["valorNivelIdiomaC1"],
+            "C2" => $_POST["valorNivelIdiomaC2"]
+        ];
+
+        foreach ($nivelesIdioma as $nivel => $valor) {
+            // Obtener el ID del nivel de idioma desde la tabla nivelesidiomas
+            $idNivelIdioma = self::obtenerIdNivelIdiomaDesdeTabla($nivel);
+    
+            // Asignar parámetros y ejecutar la inserción
+            $stmtConvoBaremoIdioma->bindParam(':fk_niveles_idiomas', $idNivelIdioma, PDO::PARAM_INT);
+            $stmtConvoBaremoIdioma->bindParam(':fk_convocatoria_Baremo', $fk_convocatoria_Baremo, PDO::PARAM_INT);
+            $stmtConvoBaremoIdioma->bindParam(":valor", $valor, PDO::PARAM_INT);
+    
+            $stmtConvoBaremoIdioma->execute();
+        }
+
+} 
+
+    // Insertar en la tabla convocatoriabaremo para Notas
+    if ($notas) {
+        $infoNotas = self::obtenerInfoItemBaremo("Notas");
+        $sqlConvoBaremoNotas = "INSERT INTO convocatoriabaremo (id_convocatoria,  fk_item_baremo, notaMaxima, valorMinimo,aportaAlumno) VALUES (:id_convocatoria, :fk_item_notas, :notaMaxima, :valorMinimo,:aporteAlumnoNotas)";
+        $stmtConvoBaremoNotas = $conexion->prepare($sqlConvoBaremoNotas);
+        $stmtConvoBaremoNotas->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmtConvoBaremoNotas->bindParam(':fk_item_notas', $infoNotas['id'], PDO::PARAM_INT);
+        $stmtConvoBaremoNotas->bindParam(':notaMaxima', $notaMaxima, PDO::PARAM_INT);
+        $stmtConvoBaremoNotas->bindParam(':valorMinimo', $valorMinimo, PDO::PARAM_INT);    
+        $stmtConvoBaremoNotas->bindParam(':aporteAlumnoNotas', $aporteAlumnoNotas, PDO::PARAM_INT);
+
+ 
+        
+        $stmtConvoBaremoNotas->execute();
+    }
+
+    // Insertar en la tabla convocatoriabaremo para Entrevista
+    if ($entrevista) {
+        $infoEntrevista = self::obtenerInfoItemBaremo("Entrevista");
+        $sqlConvoBaremoEntrevista = "INSERT INTO convocatoriabaremo (id_convocatoria, fk_item_baremo, notaMaxima, valorMinimo,aportaAlumno) VALUES (:id_convocatoria, :fk_item_entrevista, :notaMaximaEntrevista, :valorMinimoEntrevista, :aporteAlumnoEntrevista)";
+        $stmtConvoBaremoEntrevista = $conexion->prepare($sqlConvoBaremoEntrevista);
+        $stmtConvoBaremoEntrevista->bindParam(':id_convocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmtConvoBaremoEntrevista->bindParam(':fk_item_entrevista', $infoEntrevista['id'], PDO::PARAM_INT);
+        $stmtConvoBaremoEntrevista->bindParam(':notaMaximaEntrevista', $notaMaximaEntrevista, PDO::PARAM_INT);
+        $stmtConvoBaremoEntrevista->bindParam(':valorMinimoEntrevista', $valorMinimoEntrevista, PDO::PARAM_INT);
+        $stmtConvoBaremoEntrevista->bindParam(':aporteAlumnoEntrevista', $aporteAlumnoEntrevista, PDO::PARAM_INT);
+
+
+        $stmtConvoBaremoEntrevista->execute();
+    }
+
+    
+        // Confirmar la transacción
+        $conexion->commit();
+    } catch (Exception $e) {
+        // Manejar cualquier excepción y realizar un rollback si es necesario
+        $conexion->rollBack();
+        echo "Error: " . $e->getMessage();
+    } finally {
+        $stmt->closeCursor();
+    }
+}
 
 
 
@@ -149,8 +291,6 @@ public static function obtenerIdNivelIdiomaDesdeTabla($nivel)
 
     $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Cierra la conexión si es necesario
-    // $conexion = null;
 
     if ($resultado) {
         return $resultado['id'];

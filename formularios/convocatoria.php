@@ -36,12 +36,23 @@
 
               //Para entrevista
               $valorNivelIdioma = isset($_POST["valorNivelIdioma"]) ? 1 : 0;
-             /*  $notaMaximaEntrevista = $_POST["notaMaximaEntrevista"];   
-              $valorMinimoEntrevista = $_POST["valorMinimoEntrevista"];  */
+             
             
+
+              //Aporte alumno de Idioma
+              $aporteAlumnoIdioma = isset($_POST["aporteAlumnoIdioma"]) ? 1 : 0;
+
+               //Aporte alumno de Entrevista
+               $aporteAlumnoEntrevista = isset($_POST["aporteAlumnoEntrevista"]) ? 1 : 0;
+
+                //Aporte alumno de Notas
+              $aporteAlumnoNotas = isset($_POST["aporteAlumnoNotas"]) ? 1 : 0;
+
+
+
         
             // Llamada a la función para crear un nuevo candidato
-            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario ,$requisito ,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma);
+            convocatoriaRepo::crearConvocatoria($movilidades, $tipo, $fechaInicio, $fechaFin, $fechaInicioPrueba, $fechaFinPrueba, $fechaInicioDefinitiva, $fk_proyecto,$id_destinatario ,$requisito ,$notas,$notaMaxima,$valorMinimo,$entrevista,$notaMaximaEntrevista,$valorMinimoEntrevista,$valorNivelIdioma,$aporteAlumnoIdioma,$aporteAlumnoNotas,$aporteAlumnoEntrevista);
         
         }
 
@@ -125,11 +136,11 @@
 
 
 
-    <!-- <label for="valorNivelIdioma">Valor Nivel de Idioma:</label>
-        <input type="text" id="valorNivelIdioma" name="valorNivelIdioma"><br><br> -->
 
         
     <div id="elementosBaremo" style="display: none;">
+
+
         <label for="valorNivelIdioma">Nivel de Idioma:</label>
         <input type="checkbox" id="valorNivelIdioma" name="valorNivelIdioma" value="valorNivelIdioma" onchange="mostrarCamposNivelIdioma(this)">
 
@@ -156,6 +167,11 @@
 
         <label for="valorNivelIdiomaC2">Valor Nivel C2:</label>
         <input type="text" id="valorNivelIdiomaC2" name="valorNivelIdiomaC2"><br><br>
+
+        <label for="aporteAlumnoIdioma">Aporte Alumno:</label>
+        <input type="checkbox" id="aporteAlumnoIdioma" name="aporteAlumnoIdioma" value="aporteAlumno">
+        <hr>
+
     </div>
      
 
@@ -177,6 +193,8 @@
 
             <label for="ficheroIdoneidadEntrevista">Fichero de Idoneidad:</label>
             <input type="checkbox" id="ficheroIdoneidadEntrevista" name="ficheroIdoneidadEntrevista" value="ficheroIdoneidad">
+            <hr>
+
         </div>
 
         
@@ -192,11 +210,13 @@
             <label for="valorMinimo">Valor Mínimo:</label>
             <input type="text" id="valorMinimo" name="valorMinimo"><br><br>
 
-            <label for="aporteAlumno">Aporte Alumno:</label>
+            <label for="aporteAlumnoNotas">Aporte Alumno:</label>
             <input type="checkbox" id="aporteAlumnoNotas" name="aporteAlumnoNotas" value="aporteAlumno">
 
             <label for="ficheroIdoneidad">Fichero de Idoneidad:</label>
             <input type="checkbox" id="ficheroIdoneidadNotas" name="ficheroIdoneidadNotas" value="ficheroIdoneidad">
+            <hr>
+
         </div> 
 
         <label for="requisito">Requisito:</label>

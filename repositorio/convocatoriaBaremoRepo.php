@@ -37,19 +37,39 @@ class ConvocatoriaBaremoRepo {
         $stmt->close();
     }
 
-    // Leer un registro de convocatoria baremo por ID
-    public static function leerConvocatoriaBaremoPorId($id) {
+
+    public static function obtenerConvocatoriaBaremoPorConvocatoria($idConvocatoria)
+    {
         $conexion = db::entrar();
 
-        $sql = "SELECT * FROM convocatoria_baremo WHERE id=?";
+        $sql = "SELECT * FROM convocatoriabaremo WHERE id_convocatoria = :idConvocatoria";
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("i", $id);
+        $stmt->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
         $stmt->execute();
-        $result = $stmt->get_result();
-        $convocatoriaBaremo = $result->fetch_assoc();
-        $stmt->close();
-        return $convocatoriaBaremo;
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static  function obtenerConvocatoriaBaremoPorId($id)
+    {
+        $conexion = db::entrar();
+
+        $sql = "SELECT * FROM convocatoriabaremo WHERE id = :id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+
+   /*  public function obtenerConvocatoriaBaremoPorConvocatoria($idConvocatoria)
+    {
+        $sql = "SELECT * FROM convocatoria_baremo WHERE id_convocatoria = :idConvocatoria";
+        $stmt = $this->conexion->prepare($sql);
+        $stmt->bindParam(':idConvocatoria', $idConvocatoria, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } */
+
 
     // Leer todos los registros de convocatoria baremo
     public static function leerTodasLasConvocatoriasBaremo() {
