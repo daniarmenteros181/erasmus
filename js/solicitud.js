@@ -76,16 +76,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+/* mirar esto de aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+ *
 
-// Obtener el ID del candidato
-var idCandidato = document.getElementById('idCandidato').value;
+
+/// Obtener el ID del candidato
+/* var idCandidato = document.getElementById('idCandidato').value;
 // Obtener la ID de la convocatoria
 var idConvo = document.getElementById('idConvo').value;
 
 // Crear un objeto FormData para enviar datos
 var formData = new FormData();
 formData.append('id_candidatos', idCandidato);
-formData.append('id_convocatoria', idConvo);
+formData.append('id_convocatoria', idConvo); */
 
           // Hacer la solicitud a la API
     fetch('http://erasmus.com/api/baremacionApi.php', {
