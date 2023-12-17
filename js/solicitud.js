@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Hacer la solicitud a la API para obtener los datos del candidato
-     fetch(`http://erasmus.com/api/candidatosApi.php?id=${idCandidato}`)
+     fetch(`https://erasmus.com/api/candidatosApi.php?id=${idCandidato}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         // Hacer la solicitud a la API para actualizar los datos del candidato
-            fetch('http://erasmus.com/api/candidatosApi.php', {
+            fetch('https://erasmus.com/api/candidatosApi.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             
         // Hacer la solicitud a la API para crear la solicitud
-        fetch('http://erasmus.com/api/candidatosConvocatoriaApi.php', {
+        fetch('https://erasmus.com/api/candidatosConvocatoriaApi.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Hacer la solicitud a la API
-    fetch('http://erasmus.com/api/baremacionApi.php', {
+    fetch('https://erasmus.com/api/baremacionApi.php', {
         method: 'POST',
         body: formDataBaremacion
     })
@@ -135,7 +135,7 @@ function llenarFormulario(candidato) {
 
  // Función para obtener información de los baremos con aportaAlumno
  function obtenerBaremosAportaAlumno(idConvo) {
-    fetch(`http://erasmus.com/api/baremosAportaAlumno.php?idConvo=${idConvo}`)
+    fetch(`https://erasmus.com/api/baremosAportaAlumno.php?idConvo=${idConvo}`)
         .then(response => response.json())
         .then(data => {
             if (data.error) {

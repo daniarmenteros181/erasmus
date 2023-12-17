@@ -17,7 +17,9 @@ navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
 
  
 
-  captureButton.addEventListener('click', () => {
+  captureButton.addEventListener('click', (event) => {
+    event.preventDefault();
+
     // Draw the video frame to the canvas.
     context.drawImage(player, 0, 0, canvas.width, canvas.height);
   });

@@ -24,8 +24,10 @@ class seleccionConvocatoria {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Editar Candidato</title>
-        <script src="../js/solicitud.js"></script>
+         <script src="../js/solicitud.js"></script>        
         <link rel="stylesheet" href="../estilos/crearSolicitud.css">
+        <script src="../js/webCam.js"></script>
+
         </head>
         
         <body>
@@ -85,6 +87,12 @@ class seleccionConvocatoria {
     <div class="center" id="contenedorItemBaremos">
 
     </div>
+
+    <video id="player" controls autoplay></video>
+     <button id="capture">Capture</button>
+    <canvas id="canvas" width="320" height="240"></canvas>
+
+
         
         <input type="submit" name="Actualizar" value="Crear">
         <input type="submit" name="descargarPDF" value="Descargar PDF">
