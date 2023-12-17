@@ -62,11 +62,3 @@
 
 
 
-
-/* Limpiar el float para evitar problemas de diseño */
-/* #miFormularioConvo:after {
-    content: "";
-    display: table;
-    clear: both;
-}
- */

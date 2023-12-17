@@ -1,7 +1,6 @@
 <?php
 class Destinatario {
-/*     private $id;
- */    private $codGrupo;
+    private $codGrupo;
     private $nombre;
 
     public function __construct($codGrupo, $nombre) {
@@ -9,10 +8,7 @@ class Destinatario {
         $this->nombre = $nombre;
     }
 
-   /*  public function getId() {
-        return $this->id;
-    } */
-
+   
     public function getCodGrupo() {
         return $this->codGrupo;
     }
