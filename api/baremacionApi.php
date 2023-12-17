@@ -8,9 +8,9 @@ require_once('../repositorio/itemBaremoRepo.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         $conexion = db::entrar();
-        $conexion->beginTransaction(); // Iniciar transacción
+        $conexion->beginTransaction(); 
 
-        // Obtener los datos del formulario, incluyendo los archivos
+        // Obtener los datos del formulario
         $datos_post = $_POST;
         $archivos = $_FILES;
 
@@ -44,24 +44,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                         // Verificar si la ejecución de la consulta fue exitosa
                         if ($statementBaremacion->execute()) {
-                            // Puedes hacer algo aquí si es necesario después de cada inserción
                         } else {
                             // Enviar respuesta de error si la ejecución de la consulta falló
                             $conexion->rollBack();
                             header('HTTP/1.0 500 Internal Server Error');
                             echo json_encode(['error' => 'Error al insertar datos en la tabla baremacion']);
-                            exit; // Salir del script si hay un error
+                            exit;
                         }
                     } else {
                         // Enviar respuesta de error si no se encontró el ítem de baremo
                         $conexion->rollBack();
                         header('HTTP/1.0 404 Not Found');
                         echo json_encode(['error' => 'No se encontró el ítem de baremo para la convocatoria proporcionada']);
-                        exit; // Salir del script si hay un error
+                        exit; 
                     }
                 }
 
-                // Commit de la transacción si todo es exitoso
+                
                 $conexion->commit();
                 header('Content-type: application/json');
                 echo json_encode(['mensaje' => 'Datos insertados correctamente']);
@@ -73,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
         } else {
-            // Enviar respuesta de error si los datos no son válidos
+           
             $conexion->rollBack();
             header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'Datos no válidos']);
@@ -88,19 +87,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 // Función para subir un archivo al servidor y devolver la ruta del archivo
 function subirArchivo($archivo) {
-    // Directorio donde se almacenarán los archivos (ajústalo según tus necesidades)
+    // Directorio donde se almacenarán los archivos
     $directorioDestino = '../almacen/';
 
     // Nombre del archivo
     $nombreArchivo = basename($archivo['name']);
 
-    // Ruta completa del archivo en el servidor
     $rutaCompleta = $directorioDestino . $nombreArchivo;
 
     // Mueve el archivo al directorio de destino
     if (move_uploaded_file($archivo['tmp_name'], $rutaCompleta)) {
         return $rutaCompleta;
     } else {
-        return null; // Puedes manejar el error de otra manera si lo deseas
+        return null; 
     }
 }

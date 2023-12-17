@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $convocatoriaBaremoIdioma = convocatoriaRepo::leerConvocatoriaPorId($id);
         echo json_encode(['convocatoriaBaremoIdioma' => $convocatoriaBaremoIdioma]);
     }
-    // Obtener todas las asociaciones
     else {
         $todasLasConvocatoriasBaremoIdioma = convocatoriaRepo::leerTodasLasConvocatorias();
         echo json_encode(['todasLasConvocatoriasBaremoIdioma' => $todasLasConvocatoriasBaremoIdioma]);

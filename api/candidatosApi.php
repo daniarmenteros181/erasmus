@@ -1,12 +1,8 @@
 <?php
 
 
-require_once('../repositorio/db.php'); // Asegúrate de proporcionar la ruta correcta
-require_once('../repositorio/candidatosRepo.php'); // Asegúrate de proporcionar la ruta correcta
-
-
-
-
+require_once('../repositorio/db.php'); 
+require_once('../repositorio/candidatosRepo.php'); 
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -26,12 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                 header('Content-type: application/json');
                 echo json_encode(['candidato' => $candidato]);
             } else {
-                // Si no se encuentra el candidato
                 header('HTTP/1.0 404 Not Found');
                 echo json_encode(['error' => 'No se encontró el candidato con el ID proporcionado']);
             }
         } else {
-            // Si no se proporcionó un ID válido en la URL
             header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'ID no válido proporcionado']);
         }
@@ -72,7 +66,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         echo json_encode(['success' => true, 'message' => 'Candidato actualizado correctamente']);
 
     } catch (PDOException $e) {
-        // Manejar errores de la base de datos
         header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }

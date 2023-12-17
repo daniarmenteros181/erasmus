@@ -1,7 +1,7 @@
 <?php
 
 
-require_once('../repositorio/db.php'); // Asegúrate de proporcionar la ruta correcta
+require_once('../repositorio/db.php'); 
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -28,12 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             header('Content-type: application/json');
             echo json_encode(['baremos' => $resultados]);
         } else {
-            // Si no se proporcionó un idConvo válido en la URL
             header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'ID de convocatoria no válido proporcionado']);
         }
     } catch (PDOException $e) {
-        // Manejar errores de la base de datos
         header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
