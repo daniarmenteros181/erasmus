@@ -90,7 +90,6 @@ function subirArchivo($archivo) {
     // Directorio donde se almacenarán los archivos
     $directorioDestino = '../almacen/';
 
-    // Nombre del archivo
     $nombreArchivo = basename($archivo['name']);
 
     $rutaCompleta = $directorioDestino . $nombreArchivo;

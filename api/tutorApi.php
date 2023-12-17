@@ -32,7 +32,7 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     try {
         $conexion = db::entrar();
 
-        $idTutor = $_GET['id']; // Ajusta esto según cómo manejas los parámetros
+        $idTutor = $_GET['id']; 
 
         $resultado = TutorRepo::borrarTutor($idTutor);
 
