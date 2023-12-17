@@ -1,8 +1,7 @@
 window.addEventListener("load",function(){
 
     const player = document.getElementById('player');
-/* const anotherPlayer = document.getElementById('anotherPlayer');
- */
+
 const constraints = {
     video: true,
 };

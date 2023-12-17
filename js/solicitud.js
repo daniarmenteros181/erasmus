@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var nombreCampo = boton.name;
         var valorCampo;
 
-        // Verificar si el campo tiene un valor (seleccionaron un archivo)
+        // Verificar si el campo tiene un valor 
         if (boton.files.length > 0) {
             valorCampo = boton.files[0];
         } else {
@@ -163,7 +163,7 @@ function generarBotonesBaremos(baremos) {
         boton.type = 'file';
         boton.name = `archivo_${baremo.fk_item_baremo}`;
         boton.id = `archivo_${baremo.fk_item_baremo}`;
-        boton.accept = '.pdf'; // Establecer el tipo de archivo aceptado (puedes ajustarlo según tus necesidades)
+        boton.accept = '.pdf'; // Establecer el tipo de archivo aceptado 
 
         // Crear una etiqueta y un espacio para el nombre del baremo
         var etiqueta = document.createElement('label');

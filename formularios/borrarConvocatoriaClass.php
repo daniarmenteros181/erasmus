@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'])) {
 
 
  
-    // Redirigir a la página principal o a donde desees después de borrar
+    // Redirigir a la página 
      header("Location: ?menu=administrarConvocatorias");
      exit();
 } 

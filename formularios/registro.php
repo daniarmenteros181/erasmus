@@ -32,7 +32,6 @@ class registro{
             // Llamada a la función para crear un nuevo candidato
             CandidatosRepo::crearCandidatoo($dni, $fechaNac, $apellidos, $nombre, $telefono, $correo, $domicilio,$fk_destinatario, $contra, 'usuario');
 
-            /* TutorRepo::crearTutor($dniTutor, $nombreTutor, $apellidosTutor, $tutorTelefono, $domicilioTutor);*/
         
     
             

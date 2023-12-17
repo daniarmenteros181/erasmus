@@ -17,7 +17,6 @@ class funcionesLogin{
 // Función para verificar el inicio de sesión en la base de datos
  public static function existeUsuario($nombreUsuario, $contra) {
     
-    // Conectar a la base de datos utilizando la clase db
     $conexion = db::entrar();
 
     // Consultar la base de datos para encontrar un usuario con el nombre proporcionado

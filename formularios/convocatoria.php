@@ -1,10 +1,7 @@
 
 <?php
 
-
-
-//Lo que tengo que hacer es dividir el formulario en tres y cada vez que le de a siguiente o anterior me lo vaya mostrando 
- class convocatoria{
+class convocatoria{
 
 
     public static function comenzar(){
@@ -71,7 +68,6 @@
     <title>Formulario Dividido</title>
          <link rel="stylesheet" href="../estilos/crearConvocatoria.css">
 
-           <link rel="stylesheet" href="../js/convo.js">
 
 
     
@@ -96,10 +92,10 @@
         <label for="id_destinatario">Destinatario:</label>
          <select id="id_destinatario" name="id_destinatario">
          <?php
-        // Obtén la lista de IDs y nombres de destinatarios
-        $destinatarios = DestinatarioRepo::leerDatosDestinatarios();
 
-        // Genera las opciones del formulario
+
+    $destinatarios = DestinatarioRepo::leerDatosDestinatarios();
+
         foreach ($destinatarios as $destinatario) {
             $idDestinatario = $destinatario['cod_grupo'];
             $nombreDestinatario = $destinatario['nombre'];
@@ -113,7 +109,6 @@
         <select id="fk_proyecto" name="fk_proyecto"><br><br>
 
                 <?php
-        // Obtén la lista de códigos y nombres de proyectos
         $proyectos = ProyectoRepo::leerCodigosYNombresProyectos();
 
         // Genera las opciones del formulario
@@ -293,7 +288,6 @@
     }
 
     function siguiente3() {
-        // Puedes agregar lógica adicional o enviar el formulario aquí
         alert('Formulario enviado');
     }
 

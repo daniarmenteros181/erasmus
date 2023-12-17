@@ -20,8 +20,8 @@ class administrarSolicitudes {
             baremacionRepo::actualizarBaremacion($id, $fk_candidatos_baremacion, $fk_convocatorias_baremacion, $fk_item_baremo, $notas, $url);
 
 
-            // Redirigir a la página principal o a donde desees después de actualizar
-            header('Location: ?menu=administrarSolicitudes');  // Ajusta el nombre de tu página principal
+            // Redirigir a la página
+            header('Location: ?menu=administrarSolicitudes');  
             exit();
         }
 
