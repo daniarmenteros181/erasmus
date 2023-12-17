@@ -78,16 +78,20 @@ class seleccionConvocatoria {
         <input type="hidden" id="idCandidato" name="id" value="<?php echo $idCandidato; ?>">
         <input type="hidden" id="idConvo" name="idConvo" value="<?php echo $idConvo; ?>">
 
+        
+    </div>
+       
+    
+    <div class="center" id="contenedorItemBaremos">
 
-        </div>
+    </div>
+        
         <input type="submit" name="Actualizar" value="Crear">
         <input type="submit" name="descargarPDF" value="Descargar PDF">
 
         <br>
 
-        <div id="contenedorItemBaremos">
-
-        </div>
+        
     </form>
     </body>
     </html>

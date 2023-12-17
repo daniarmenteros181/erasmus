@@ -1,8 +1,8 @@
 <?php
 
 
-require_once('../repositorio/db.php'); // Asegúrate de proporcionar la ruta correcta
-require_once('../repositorio/candidatosConvocatoriaRepo.php'); // Asegúrate de proporcionar la ruta correcta
+require_once('../repositorio/db.php'); 
+require_once('../repositorio/candidatosConvocatoriaRepo.php'); 
 
 
 if ($_SERVER['REQUEST_METHOD']=='POST')	{
@@ -21,8 +21,7 @@ try {
         // Llamar a la función para insertar candidato en la convocatoria
         candidatosConvocatoriaRepo::insertarCandidatoConvocatoria($datos_post->id_candidatos, $datos_post->id_convocatoria);
 
-/*         $idBaremacion = candidatosConvocatoriaRepo::insertarCandidatoConvocatoria($datos_post['id_candidatos'], $datos_post['id_convocatoria']);
- */
+
 
         // Enviar respuesta de éxito
         header('Content-type: application/json');

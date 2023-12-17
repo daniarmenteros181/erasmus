@@ -15,18 +15,7 @@ class DestinatarioRepo {
         $stmt->closeCursor();
     }
 
-    /* // Actualizar un destinatario existente por ID
-    public static function actualizarDestinatario($cod_grupo, $nombre) {
-        $conexion = db::entrar();
 
-        $sql = "UPDATE destinatario SET cod_grupo=:cod_grupo, nombre=:nombre WHERE id=:id";
-        $stmt = $conexion->prepare($sql);
-        $stmt->bindParam(':cod_grupo', $cod_grupo);
-        $stmt->bindParam(':nombre', $nombre);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        $stmt->closeCursor();
-    } */
 
     // Borrar un destinatario por ID
     public static function borrarDestinatario($id) {
@@ -62,20 +51,7 @@ class DestinatarioRepo {
         return $destinatarios;
     }
 
-    /* // Leer todos los destinatarios y obtener ID y nombre
-    public static function leerIdsYNombresDestinatarios() {
-        $conexion = db::entrar();
 
-        $sql = "SELECT cod_grupo, nombre FROM destinatario";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute();
-
-        $destinatarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        $stmt->closeCursor();
-
-        return $destinatarios;
-    } */
 
     // Leer todos los destinatarios y obtener ID, código de grupo y nombre
     public static function leerDatosDestinatarios() {

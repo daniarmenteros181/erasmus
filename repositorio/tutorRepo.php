@@ -1,9 +1,7 @@
 <?php
 class TutorRepo {
     
-    // Crear un nuevo tutor
-    //public static function crearTutor($objeto) {
-    // $tipo=$objeto->getTipo();
+  
 
     public static function crearTutor($dni, $nombre, $apellidos, $tlf, $domicilio) {
         $conexion = db::entrar();

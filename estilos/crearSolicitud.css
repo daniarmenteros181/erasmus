@@ -18,6 +18,11 @@
     float: left;
 }
 
+#candidatoForm .center {
+    width: 48%; 
+    float: none;
+}
+
 #candidatoForm #segundo {
     float: right;
 }

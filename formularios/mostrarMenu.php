@@ -20,6 +20,8 @@ class mostrarMenu{
             <nav>
             <a href="?menu=administrarConvocatorias">Administrar Convocatorias</a>
             <a href="?menu=crearConvocatoria">Crear Convocatoria</a>
+            <a href="?menu=administrarSolicitudes">Administrar solicitudes</a>
+
             </nav> 
         </div>
         </form>

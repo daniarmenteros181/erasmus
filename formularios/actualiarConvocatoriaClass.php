@@ -30,7 +30,7 @@ private static function mostrarFormulario($convocatoria) {
     // formulario con los datos existentes
 
     echo "<div id='form-container'>";
-    echo "<form method='post' id='deAct' action='../formularios/guardarActualizacion.php'>";
+    echo "<form method='post' id='deAct' action='?menu=administrarConvocatorias'>";
     echo "<input type='hidden' name='id' value='" . $convocatoria['id'] . "'>";
 
     echo "<link rel='stylesheet' href='../estilos/actualizacionConvocatoria.css'>";

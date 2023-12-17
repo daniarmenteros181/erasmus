@@ -76,70 +76,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-/* mirar esto de aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
- *
+    // Crear un objeto FormData para enviar datos
+    var formDataBaremacion = new FormData();
+    formDataBaremacion.append('id_candidatos', idCandidato);
+    formDataBaremacion.append('id_convocatoria', idConvo);
 
+    // Obtener los elementos de tipo file
+    var camposArchivo = document.querySelectorAll('[type="file"]');
 
-/// Obtener el ID del candidato
-/* var idCandidato = document.getElementById('idCandidato').value;
-// Obtener la ID de la convocatoria
-var idConvo = document.getElementById('idConvo').value;
+    // Iterar sobre los campos de archivo y agregar al FormData según el tipo
+    camposArchivo.forEach(boton => {
+        var nombreCampo = boton.name;
+        var valorCampo;
 
-// Crear un objeto FormData para enviar datos
-var formData = new FormData();
-formData.append('id_candidatos', idCandidato);
-formData.append('id_convocatoria', idConvo); */
+        // Verificar si el campo tiene un valor (seleccionaron un archivo)
+        if (boton.files.length > 0) {
+            valorCampo = boton.files[0];
+        } else {
+            // Si no hay un archivo seleccionado, asumimos que es un campo de texto (URL)
+            valorCampo = document.getElementById(`url_${nombreCampo}`).value;
+        }
 
-          // Hacer la solicitud a la API
+        // Agregar al FormData
+        formDataBaremacion.append(nombreCampo, valorCampo);
+    });
+
+    // Hacer la solicitud a la API
     fetch('http://erasmus.com/api/baremacionApi.php', {
         method: 'POST',
-        body: formData
+        body: formDataBaremacion
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => console.error('Error en la solicitud:', error));
 
 
+    
+    window.location.href = '?menu=verConvocatorias'; // Redirigir a la página deseada
 
 
+});
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-            });
 });
 
 
@@ -201,35 +176,3 @@ function generarBotonesBaremos(baremos) {
         contenedor.appendChild(document.createElement('br')); // Añadir un salto de línea para separar los elementos
     });
 }
-
-
-
-
-
-/* // Función para subir archivos
-function subirArchivo($archivo)
-{
-    // Lógica para subir el archivo a la ubicación deseada
-    // Aquí puedes usar move_uploaded_file u otra lógica según tus necesidades
-
-    // Ejemplo básico:
-    $nombreArchivo = basename($archivo['name']);
-    $rutaDestino = 'ruta/donde/quieres/guardar/' . $nombreArchivo;
-    move_uploaded_file($archivo['tmp_name'], $rutaDestino);
-
-    return $rutaDestino;
-}
-
-// Función para obtener el ID del item baremo desde el nombre del campo en el formulario
-function obtenerIdItemBaremoDesdeNombreCampo($nombreCampo)
-{
-    // Implementa la lógica necesaria para obtener el ID del item baremo según el nombre del campo
-    // Puedes realizar una consulta a la base de datos o utilizar una lógica predefinida
-    // Retorna el ID del item baremo correspondiente
-
-    // Ejemplo básico:
-    // Supongamos que los nombres de los campos son "archivo_1", "archivo_2", etc.
-    // Entonces, extraemos el número del nombre del campo
-    $numeroCampo = str_replace('archivo_', '', $nombreCampo);
-    return intval($numeroCampo);
-} */

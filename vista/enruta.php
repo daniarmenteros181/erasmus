@@ -40,11 +40,18 @@
     if ($_GET['menu']=="eliminacion"){
         require_once './formularios/borrarConvocatoriaClass.php';
 
-    }if ($_GET['menu']=="edicionConvo"){
+    }if ($_GET['menu']=="actualiarConvocatoriaClass"){
         require_once './formularios/actualiarConvocatoriaClass.php';
 
-    }
+    }if ($_GET['menu']=="administrarSolicitudes"){
+        require_once './formularios/administrarSolicitudes.php';
 
+    }if ($_GET['menu']=="edicionBaremacion"){
+        require_once './formularios/edicionBaremacion.php';
+
+    }
+    
+    
     
     
 }else {
