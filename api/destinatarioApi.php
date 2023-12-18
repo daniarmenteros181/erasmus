@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
         echo json_encode(['destinatario' => $nuevoDestinatario]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
@@ -39,11 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         // Enviar la respuesta
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 } else {
-    header('HTTP/1.0 405 Method Not Allowed');
     echo json_encode(['error' => 'Método no permitido']);
 }
 ?>

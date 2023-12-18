@@ -26,8 +26,8 @@ class seleccionConvocatoria {
         <title>Editar Candidato</title>
          <script src="../js/solicitud.js"></script>        
         <link rel="stylesheet" href="../estilos/crearSolicitud.css">
-        <script src="../js/webCam.js"></script>
-
+<!--         <script src="../js/webCam.js"></script>
+ -->
         </head>
         
         <body>
@@ -88,9 +88,9 @@ class seleccionConvocatoria {
 
     </div>
 
-    <video id="player" controls autoplay></video>
+    <!-- <video id="player" controls autoplay></video>
      <button id="capture">Capture</button>
-    <canvas id="canvas" width="320" height="240"></canvas>
+    <canvas id="canvas" width="320" height="240"></canvas> -->
 
 
         

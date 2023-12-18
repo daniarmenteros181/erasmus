@@ -25,14 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $resultados = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             // Convertir a JSON y enviar la respuesta
-            header('Content-type: application/json');
             echo json_encode(['baremos' => $resultados]);
         } else {
-            header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'ID de convocatoria no válido proporcionado']);
         }
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }

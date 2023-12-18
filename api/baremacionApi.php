@@ -47,14 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         } else {
                             // Enviar respuesta de error si la ejecución de la consulta falló
                             $conexion->rollBack();
-                            header('HTTP/1.0 500 Internal Server Error');
                             echo json_encode(['error' => 'Error al insertar datos en la tabla baremacion']);
                             exit;
                         }
                     } else {
                         // Enviar respuesta de error si no se encontró el ítem de baremo
                         $conexion->rollBack();
-                        header('HTTP/1.0 404 Not Found');
                         echo json_encode(['error' => 'No se encontró el ítem de baremo para la convocatoria proporcionada']);
                         exit; 
                     }
@@ -67,20 +65,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } else {
                 // Enviar respuesta de error si no se encontró la convocatoriaBaremo
                 $conexion->rollBack();
-                header('HTTP/1.0 404 Not Found');
                 echo json_encode(['error' => 'No se encontró convocatoriaBaremo para la convocatoria proporcionada']);
             }
 
         } else {
            
             $conexion->rollBack();
-            header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'Datos no válidos']);
         }
     } catch (PDOException $e) {
         // Manejar errores de la base de datos y hacer rollback en caso de error
         $conexion->rollBack();
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }

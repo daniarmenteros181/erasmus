@@ -9,14 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $nivelesIdiomas = NivelesIdiomasRepo::leerTodosLosNivelesIdiomas();
 
         if ($nivelesIdiomas) {
-            header('Content-type: application/json');
             echo json_encode(['nivelesIdiomas' => $nivelesIdiomas]);
         } else {
-            header('HTTP/1.0 404 Not Found');
             echo json_encode(['error' => 'No se encontraron niveles de idiomas']);
         }
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -30,10 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $nuevoNivelIdioma = NivelesIdiomasRepo::crearNivelIdioma($datos);
 
-        header('Content-type: application/json');
         echo json_encode(['nivelIdioma' => $nuevoNivelIdioma]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -46,10 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 
         $resultado = NivelesIdiomasRepo::borrarNivelIdioma($idNivelIdioma);
 
-        header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -63,10 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
 
         $resultado = NivelesIdiomasRepo::actualizarNivelIdioma($datos);
 
-        header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }

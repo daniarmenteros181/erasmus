@@ -19,19 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             // Verificar si se encontró el candidato
             if ($candidato) {
                 // Convertir a JSON y enviar la respuesta
-                header('Content-type: application/json');
                 echo json_encode(['candidato' => $candidato]);
             } else {
-                header('HTTP/1.0 404 Not Found');
                 echo json_encode(['error' => 'No se encontró el candidato con el ID proporcionado']);
             }
         } else {
-            header('HTTP/1.0 400 Bad Request');
             echo json_encode(['error' => 'ID no válido proporcionado']);
         }
     } catch (PDOException $e) {
         // Manejar errores de la base de datos
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 } 
@@ -66,7 +62,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         echo json_encode(['success' => true, 'message' => 'Candidato actualizado correctamente']);
 
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }

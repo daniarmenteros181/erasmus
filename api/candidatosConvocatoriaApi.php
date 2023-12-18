@@ -22,14 +22,11 @@ try {
 
 
 
-        header('Content-type: application/json');
         echo json_encode(['mensaje' => 'Candidato insertado en la convocatoria correctamente']);
     } else {
-        header('HTTP/1.0 400 Bad Request');
         echo json_encode(['error' => 'Datos no válidos']);
     }
 } catch (PDOException $e) {
-    header('HTTP/1.1 500 Internal Server Error');
     echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
 }
     

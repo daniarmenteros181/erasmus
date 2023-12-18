@@ -19,11 +19,9 @@ try {
         header('Content-type: application/json');
         echo json_encode(['tutor' => $tutor]);
     } else {
-        header('HTTP/1.0 404 Not Found');
         echo json_encode(array('error' => 'No se encontraron categorías'));
     }
 } catch (PDOException $e) {
-    header('HTTP/1.1 500 Internal Server Error');
     echo json_encode(array('error' => 'Error en la base de datos: ' . $e->getMessage()));
 }
 }
@@ -39,7 +37,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -56,7 +53,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -72,7 +68,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Content-type: application/json');
         echo json_encode(['tutor' => $nuevoTutor]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }

@@ -12,11 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             header('Content-type: application/json');
             echo json_encode(['proyectos' => $proyectos]);
         } else {
-            header('HTTP/1.0 404 Not Found');
             echo json_encode(['error' => 'No se encontraron proyectos']);
         }
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -33,7 +31,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Content-type: application/json');
         echo json_encode(['proyecto' => $nuevoProyecto]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -49,7 +46,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
@@ -66,7 +62,6 @@ elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
         header('Content-type: application/json');
         echo json_encode(['resultado' => $resultado]);
     } catch (PDOException $e) {
-        header('HTTP/1.1 500 Internal Server Error');
         echo json_encode(['error' => 'Error en la base de datos: ' . $e->getMessage()]);
     }
 }
